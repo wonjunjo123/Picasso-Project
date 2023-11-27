@@ -65,7 +65,7 @@ public class Tokenizer {
 		
 
 		List<Token> tokens = new ArrayList<Token>();
-
+		
 		Token result = nextToken();
 
 		while (true) {
