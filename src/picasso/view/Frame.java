@@ -42,13 +42,7 @@ public class Frame extends JFrame {
 		commands.add(expressionTextField);
 		
 		
-		
-		
-		//validateButton = new JButton("Validate");
-		
-		//commands.add(validateButton);
-		//validateButton.addActionListener(new ValidateButtonListener(canvas, size, commands));
-		
+	
 		
 		
 
