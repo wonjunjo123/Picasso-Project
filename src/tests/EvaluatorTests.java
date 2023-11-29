@@ -81,7 +81,7 @@ public class EvaluatorTests {
 			assertEquals(new RGBColor(i, i, i), myTree.evaluate(i, -i));
 			assertEquals(new RGBColor(i, i, i), myTree.evaluate(i, i));
 		}
-
+		
 		double[] tests = { -.7, -.00001, .000001, .5 };
 
 		for (double testVal : tests) {
