@@ -21,7 +21,7 @@ import picasso.view.commands.*;
  */
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
-	private JTextField expressionTextField;
+	private static JTextField expressionTextField;
 	private JButton validateButton;
 	public Frame(Dimension size) {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -51,6 +51,11 @@ public class Frame extends JFrame {
 		getContentPane().add(commands, BorderLayout.NORTH);
 		pack();
 	}
+	
+	public static String getExpressionText() {
+		return expressionTextField.getText();
+	}
 }
+
 	
 	
