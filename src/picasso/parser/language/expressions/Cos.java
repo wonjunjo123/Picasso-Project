@@ -21,7 +21,7 @@ public class Cos extends UnaryFunction {
 	/**
 	 * @param x
 	 * @param y
-	 * @return
+	 * @return cosColor
 	 * @see picasso.parser.language.ExpressionTreeNode#evaluate(double, double)
 	 */
 	@Override
