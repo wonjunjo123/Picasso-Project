@@ -66,6 +66,37 @@ public class EvaluatorTests {
 					myTree.evaluate(testVal, testVal));
 		}
 	}
+	
+	@Test
+	public void testClampEvaluation() {
+		Clamp myTree = new Clamp(new X());
+
+		// some straightforward tests
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1.4, -1));
+		assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(-1.999, -1));
+		assertEquals(new RGBColor(-0.7, -0.7, -0.7), myTree.evaluate(-.7, -1));
+		assertEquals(new RGBColor(0.7, 0.7, 0.7), myTree.evaluate(.7, -1));
+
+		// test the ints; remember that y's value doesn't matter
+		for (int i = -1; i <= 1; i++) {
+			assertEquals(new RGBColor(i, i, i), myTree.evaluate(i, -i));
+			assertEquals(new RGBColor(i, i, i), myTree.evaluate(i, i));
+		}
+
+		double[] tests = { -1.7, -1, -.00001, 0, .000001, 1, 1.5 };
+
+		for (double testVal : tests) {
+			double clampOfTestVal = testVal;
+			if (clampOfTestVal > 1) {
+				clampOfTestVal = 1;
+			} else if (clampOfTestVal < -1) {
+				clampOfTestVal = -1;
+			}
+			assertEquals(new RGBColor(clampOfTestVal, clampOfTestVal, clampOfTestVal), myTree.evaluate(testVal, -1));
+			assertEquals(new RGBColor(clampOfTestVal, clampOfTestVal, clampOfTestVal),
+					myTree.evaluate(testVal, testVal));
+		}
+	}
 
 	// TODO: More tests of evaluation
 
