@@ -1,12 +1,10 @@
-/**
- * 
- */
 package picasso.parser.language.expressions;
 
 import picasso.parser.language.ExpressionTreeNode;
 
 /**
- * 
+ * Cos evaluator class
+ * @author Nick Lagges
  */
 public class Cos extends UnaryFunction {
 
