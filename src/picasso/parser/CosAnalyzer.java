@@ -13,15 +13,8 @@ import picasso.parser.language.expressions.*;
 public class CosAnalyzer extends UnaryFunctionAnalyzer {
 
 	/**
-	 * 
-	 */
-	public CosAnalyzer() {
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
 	 * @param tokens
-	 * @return
+	 * @return cosETN
 	 * @see picasso.parser.UnaryFunctionAnalyzer#generateExpressionTree(java.util.Stack)
 	 */
 	@Override
