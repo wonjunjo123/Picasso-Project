@@ -1,26 +1,27 @@
-package picasso.parser.language;
+/**
+ * 
+ */
+package picasso.parser.language.expressions;
 
-import picasso.parser.language.expressions.RGBColor;
-
-import java.lang.Math;
+import picasso.parser.language.ExpressionTreeNode;
 
 /**
- * expression tree for cos expression
- * @author Nick Lagges
+ * 
  */
-public class Cos extends ExpressionTreeNode {
+public class Cos extends UnaryFunction {
 
 	/**
-	 * 
+	 * @param param
 	 */
-	public Cos() {
+	public Cos(ExpressionTreeNode param) {
+		super(param);
 		// TODO Auto-generated constructor stub
 	}
 
 	/**
 	 * @param x
 	 * @param y
-	 * @return RGB Color based on cos expression
+	 * @return
 	 * @see picasso.parser.language.ExpressionTreeNode#evaluate(double, double)
 	 */
 	@Override
