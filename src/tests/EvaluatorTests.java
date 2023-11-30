@@ -97,6 +97,37 @@ public class EvaluatorTests {
 					myTree.evaluate(testVal, testVal));
 		}
 	}
+	
+	@Test
+	public void testPlusEvaluation() {
+		Plus myTree = new Plus(new X(), new Y());
+
+		// some straightforward tests
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1, 0));
+		assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(0, -1));
+		assertEquals(new RGBColor(-0.7, -0.7, -0.7), myTree.evaluate(-0.6, -0.1));
+		assertEquals(new RGBColor(0.7, 0.7, 0.7), myTree.evaluate(0.6, 0.1));
+		assertEquals(new RGBColor(-0.5, -0.5, -0.5), myTree.evaluate(-0.6, 0.1));
+		assertEquals(new RGBColor(0.5, 0.5, 0.5), myTree.evaluate(0.6, -0.1));
+		
+		// test the ints; 
+		for (int i = -1; i <= 1; i++) {
+			assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(i, -i));
+			assertEquals(new RGBColor(2*i, 2*i, 2*i), myTree.evaluate(i, i));
+
+		}
+
+		double[] tests = { -1.7, -1, -.00001, 0, .000001, 1, 1.5 };
+		
+		for (double testVal : tests) {
+			double plusOfTestVal = testVal;
+			
+			assertEquals(new RGBColor(plusOfTestVal, plusOfTestVal, plusOfTestVal), myTree.evaluate(testVal, 0));
+			assertEquals(new RGBColor(2*plusOfTestVal, 2*plusOfTestVal, 2*plusOfTestVal),
+					myTree.evaluate(testVal, testVal));
+		}
+		
+	}
 
 	// TODO: More tests of evaluation
 
