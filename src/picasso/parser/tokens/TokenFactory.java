@@ -130,7 +130,7 @@ public class TokenFactory {
 		// Maybe not necessary. Maybe the function is just an identifier
 
 		List<String> functionsList = BuiltinFunctionsReader.getFunctionsList();
-
+		
 		for (String function : functionsList) {
 			// System.out.println("Function: " + function);
 			String functionForToken = capitalize(function);

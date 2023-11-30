@@ -55,4 +55,6 @@ public class Frame extends JFrame {
 	public static String getExpressionText() {
 		return expressionTextField.getText();
 	}
+  
 }
+
