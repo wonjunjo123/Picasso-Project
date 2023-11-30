@@ -66,7 +66,33 @@ public class EvaluatorTests {
 					myTree.evaluate(testVal, testVal));
 		}
 	}
+	
+	
+	@Test
+	public void testAbsEvaluation() {
+		Abs myTree = new Abs(new X());
 
-	// TODO: More tests of evaluation
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0.5)); 
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, -0.2));
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(-1, 0.3));
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1, -0.7));
+
+		for (int i = -1; i <= 1; i++) {
+			assertEquals(new RGBColor(Math.abs(i), Math.abs(i), Math.abs(i)), myTree.evaluate(i, -i));
+			assertEquals(new RGBColor(Math.abs(i), Math.abs(i), Math.abs(i)), myTree.evaluate(i, i));
+		}
+
+		double[] tests = { -.7, -.00001, .000001, .5 };
+
+		for (double testVal : tests) {
+			double absOfTestVal = Math.abs(testVal);
+			assertEquals(new RGBColor(absOfTestVal, absOfTestVal, absOfTestVal), myTree.evaluate(testVal, -1));
+			assertEquals(new RGBColor(absOfTestVal, absOfTestVal, absOfTestVal), myTree.evaluate(testVal, testVal));
+		}
+	}
+
+	
+	
+
 
 }
