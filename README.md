@@ -1,5 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/1EiKHzOV)
-# Picasso
+# Picasso  
+## Barrett Bourgeois, Mark Holden, Wonjun Jo, Nick Lagges, Zachary Moore 
 
 An application that allows the user to create expressions that
 evaluate to colors and then eventually to images.
