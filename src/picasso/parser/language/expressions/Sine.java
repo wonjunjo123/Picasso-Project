@@ -6,7 +6,7 @@ import picasso.parser.language.ExpressionTreeNode;
 /**
  * Represents the Sine function in the Picasso language.
  * 
- * @author Barrett Borugeois
+ * @author Barrett Bourgeois
  */
 public class Sine extends UnaryFunction {
 
@@ -24,6 +24,8 @@ public class Sine extends UnaryFunction {
 	 * the function's parameter.
 	 * 
 	 * @return the color from evaluating the sine of the expression's parameter
+	 * @param x coordinate
+	 * @param y coordinate
 	 */
 	@Override
 	public RGBColor evaluate(double x, double y) {
