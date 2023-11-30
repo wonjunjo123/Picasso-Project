@@ -103,6 +103,7 @@ public class EvaluatorTests {
 		/**for (int i = 180; i >=0; i-=90) {
 			assertEquals(new RGBColor(Math.toRadians(i), Math.toRadians(i), Math.toRadians(i)), myTree.evaluate(i, i));
 		}*/
+  }
     
   @Test
 	public void testClampEvaluation() {
