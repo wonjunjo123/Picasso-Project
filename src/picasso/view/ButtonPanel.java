@@ -3,6 +3,7 @@ package picasso.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import picasso.model.Pixmap;
@@ -45,6 +46,7 @@ public class ButtonPanel extends JPanel {
 		});
 		add(button);
 	}
+	
 
 	/**
 	 * Add the given Command as a button. The button's text will be the given
