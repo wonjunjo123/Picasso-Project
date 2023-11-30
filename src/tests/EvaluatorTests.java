@@ -68,5 +68,18 @@ public class EvaluatorTests {
 	}
 
 	// TODO: More tests of evaluation
+	
+	@Test
+	public void testCosEvaluation() {
+		Cos myTree = new Cos(new X());
+		
+		assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(180, 180));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(90, 90));
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(0, 0));
+		
+		/**for (int i = 180; i >=0; i-=90) {
+			assertEquals(new RGBColor(Math.toRadians(i), Math.toRadians(i), Math.toRadians(i)), myTree.evaluate(i, i));
+		}*/
+	}
 
 }
