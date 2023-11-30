@@ -3,7 +3,7 @@ package picasso.parser;
 import java.util.Stack;
 
 import picasso.parser.language.ExpressionTreeNode;
-import picasso.parser.language.expressions.Floor;
+import picasso.parser.language.expressions.Sine;
 import picasso.parser.tokens.Token;
 
 /** 
@@ -18,10 +18,11 @@ public class SinAnalyzer extends UnaryFunctionAnalyzer {
 		tokens.pop(); // Need to remove the sin token
 		// the parameter is the next token(s) on the stack.
 		// But, it needs to be processed
-		ExpressionTreeNode paramETN = SemanticAnalyzer.getInstance().generateExpressionTree(
-				tokens);
-		return new Floor(paramETN);
+		ExpressionTreeNode paramETN = SemanticAnalyzer.getInstance().generateExpressionTree(tokens);
 		
+		return new Sine(paramETN);
+		
+			
 	}
 
 }
