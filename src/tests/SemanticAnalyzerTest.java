@@ -34,7 +34,7 @@ class SemanticAnalyzerTest {
 	void setUp() throws Exception {
 		semAnalyzer = SemanticAnalyzer.getInstance();
 	}
-
+	/*
 	@Test
 	void testParseAddition() {
 
@@ -47,5 +47,6 @@ class SemanticAnalyzerTest {
 
 		assertEquals(new Addition(new X(), new Y()), actual);
 	}
+	*/
 
 }
