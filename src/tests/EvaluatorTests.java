@@ -199,9 +199,8 @@ public class EvaluatorTests {
 		Sine myTree = new Sine(new X());
 
 		// some straightforward tests
-		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(180, 180));
-		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(90, 90));
-		assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(-90, -90));
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(Math.PI/2.0, Math.PI/2.0));
+		assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(-Math.PI/2.0, -Math.PI/2.0));
 		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0));
 	}
 }
