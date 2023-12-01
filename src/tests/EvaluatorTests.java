@@ -96,13 +96,17 @@ public class EvaluatorTests {
 	public void testCosEvaluation() {
 		Cos myTree = new Cos(new X());
 		
-		assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(180, 180));
-		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(90, 90));
-		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(0, 0));
+		//Some basic tests
 		
-		/**for (int i = 180; i >=0; i-=90) {
-			assertEquals(new RGBColor(Math.toRadians(i), Math.toRadians(i), Math.toRadians(i)), myTree.evaluate(i, i));
-		}*/
+		System.out.println(Math.cos(Math.PI/2.0));
+		//tests for -1, -1, -1
+		for (double i = -Math.PI; i <= Math.PI; i+= 2*Math.PI) {
+			assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(-i, -i));
+		}
+		//tests for 1, 1, 1
+		for (double i = -2*Math.PI; i <= 2*Math.PI; i+= 2*Math.PI) {
+			assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(-i, -i));
+		}
   }
     
   @Test
