@@ -66,7 +66,7 @@ public class EvaluatorTests {
 					myTree.evaluate(testVal, testVal));
 		}
 	}
-	
+
 	@Test
 	public void testCeilvaluation() {
 		Ceil myTree = new Ceil(new X());
@@ -189,4 +189,16 @@ public class EvaluatorTests {
 		}
 	}
 
+  
+  @Test
+	public void testSineEvaluation() {
+		Sine myTree = new Sine(new X());
+
+		// some straightforward tests
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(180, 180));
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(90, 90));
+		assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(-90, -90));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0));
+	}
 }
+
