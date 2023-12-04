@@ -141,7 +141,7 @@ public class EvaluatorTests {
 	
 	@Test
 	public void testPlusEvaluation() {
-		Plus myTree = new Plus(new X(), new Y());
+		Addition myTree = new Addition(new X(), new Y());
 
 		// some straightforward tests
 		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1, 0));
