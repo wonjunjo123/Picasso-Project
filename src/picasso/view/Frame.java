@@ -35,7 +35,15 @@ public class Frame extends JFrame {
 		
 		ButtonPanel commands = new ButtonPanel(canvas);
 		expressionTextField = new JTextField(40);
-		
+		expressionTextField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Evaluator evaluator = new Evaluator();
+				evaluator.execute(canvas.getPixmap());
+				canvas.refresh();
+				//String test = expressionTextField.getText();
+				//System.out.println(test);
+		    }
+		});
 		commands.add("Open", new Reader());
 		commands.add("Evaluate", new ThreadedCommand<Pixmap>(canvas, new Evaluator()));
 		commands.add("Save", new Writer());
