@@ -44,7 +44,7 @@ public class ExpressionTreeGenerator {
 		SemanticAnalyzer semAnalyzer = SemanticAnalyzer.getInstance();
 
 		ExpressionTreeNode root = semAnalyzer.generateExpressionTree(postfix);
-
+		
 		// Is this the best place to put this check?
 		if (!postfix.isEmpty()) {
 			throw new ParseException("Extra operands without operators or functions");
