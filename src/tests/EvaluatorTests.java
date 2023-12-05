@@ -97,15 +97,22 @@ public class EvaluatorTests {
 		Cos myTree = new Cos(new X());
 		
 		//Some basic tests
+		RGBColor black = new RGBColor(-1, -1, -1);
+		RGBColor gray = new RGBColor(0, 0, 0);
+		RGBColor white = new RGBColor(1, 1, 1);
 		
-		System.out.println(Math.cos(Math.PI/2.0));
-		//tests for -1, -1, -1
-		for (double i = -Math.PI; i <= Math.PI; i+= 2*Math.PI) {
-			assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(-i, -i));
-		}
-		//tests for 1, 1, 1
-		for (double i = -2*Math.PI; i <= 2*Math.PI; i+= 2*Math.PI) {
-			assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(-i, -i));
+		RGBColor[] colors = {black, gray, white};
+		
+		RGBColor cosBlack = myTree.evaluate(Math.PI, Math.PI);
+		RGBColor cosGray = myTree.evaluate(Math.PI/2, Math.PI/2);
+		RGBColor cosWhite = myTree.evaluate(0, 0);
+		
+		RGBColor[] cosCols = {cosBlack, cosGray, cosWhite};
+		
+		for (int i = 0; i < 3; i++) {
+			assertEquals(colors[i].getRed(), cosCols[i].getRed(), 0.0001);
+			assertEquals(colors[i].getGreen(), cosCols[i].getGreen(), 0.0001);
+			assertEquals(colors[i].getBlue(), cosCols[i].getBlue(), 0.0001);
 		}
   }
     
@@ -196,12 +203,26 @@ public class EvaluatorTests {
   
   @Test
 	public void testSineEvaluation() {
-		Sine myTree = new Sine(new X());
-
-		// some straightforward tests
-		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(Math.PI/2.0, Math.PI/2.0));
-		assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(-Math.PI/2.0, -Math.PI/2.0));
-		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0));
+	  Sine myTree = new Sine(new X());
+		
+		//Some basic tests
+		RGBColor black = new RGBColor(-1, -1, -1);
+		RGBColor gray = new RGBColor(0, 0, 0);
+		RGBColor white = new RGBColor(1, 1, 1);
+		
+		RGBColor[] colors = {black, gray, white};
+		
+		RGBColor sinBlack = myTree.evaluate(Math.PI/-2, Math.PI/-2);
+		RGBColor sinGray = myTree.evaluate(0, 0);
+		RGBColor sinWhite = myTree.evaluate(Math.PI/2, Math.PI/2);
+		
+		RGBColor[] sinCols = {sinBlack, sinGray, sinWhite};
+		
+		for (int i = 0; i < 3; i++) {
+			assertEquals(colors[i].getRed(), sinCols[i].getRed(), 0.0001);
+			assertEquals(colors[i].getGreen(), sinCols[i].getGreen(), 0.0001);
+			assertEquals(colors[i].getBlue(), sinCols[i].getBlue(), 0.0001);
+		}
 	}
 }
 
