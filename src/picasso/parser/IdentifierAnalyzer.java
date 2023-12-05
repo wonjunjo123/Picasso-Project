@@ -31,8 +31,12 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 		IdentifierToken t = (IdentifierToken) tokens.pop();
 		String id = t.getName();
 		ExpressionTreeNode mapped = idToExpression.get(id);
+		
 		if (mapped != null) {
 			return mapped;
+		}
+		if (mapped == null) {
+			throw new ParseException("Unrecognized Identifier Variable");
 		}
 
 		// TODO : What should we do if we don't recognize the identifier?
