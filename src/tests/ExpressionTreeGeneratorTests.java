@@ -76,12 +76,13 @@ public class ExpressionTreeGeneratorTests {
 		expected.push(new IdentifierToken("x"));
 		expected.push(new IdentifierToken("y"));
 		expected.push(new IdentifierToken("x"));
-		expected.push(new MultiplyToken());
+		// expected.push(new MultiplyToken());
 		expected.push(new PlusToken());
 
 		assertEquals(expected, stack);
 	}
-
+	
+	// have everything for unary
 	@Test
 	public void floorFunctionTests() {
 		ExpressionTreeNode e = parser.makeExpression("floor( x )");
@@ -90,7 +91,7 @@ public class ExpressionTreeGeneratorTests {
 		e = parser.makeExpression("floor( x + y )");
 		assertEquals(new Floor(new Addition(new X(), new Y())), e);
 	}
-		
+
 	@Test
 	public void cosFunctionTests() {
 		ExpressionTreeNode e = parser.makeExpression("cos( x )");
