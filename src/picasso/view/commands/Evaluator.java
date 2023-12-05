@@ -38,20 +38,20 @@ public class Evaluator implements Command<Pixmap> {
 			}
 		}
 	}
-//	public void execute(Pixmap target, String s) {
-//		// create the expression to evaluate just once
-//		ExpressionTreeNode expr = createExpression(s);
-//		// evaluate it for each pixel
-//		Dimension size = target.getSize();
-//		for (int imageY = 0; imageY < size.height; imageY++) {
-//			double evalY = imageToDomainScale(imageY, size.height);
-//			for (int imageX = 0; imageX < size.width; imageX++) {
-//				double evalX = imageToDomainScale(imageX, size.width);
-//				Color pixelColor = expr.evaluate(evalX, evalY).toJavaColor();
-//				target.setColor(imageX, imageY, pixelColor);
-//			}
-//		}
-//	}
+	public void execute(Pixmap target, String s) {
+		// create the expression to evaluate just once
+		ExpressionTreeNode expr = createExpression(s);
+		// evaluate it for each pixel
+		Dimension size = target.getSize();
+		for (int imageY = 0; imageY < size.height; imageY++) {
+			double evalY = imageToDomainScale(imageY, size.height);
+			for (int imageX = 0; imageX < size.width; imageX++) {
+				double evalX = imageToDomainScale(imageX, size.width);
+				Color pixelColor = expr.evaluate(evalX, evalY).toJavaColor();
+				target.setColor(imageX, imageY, pixelColor);
+			}
+		}
+	}
 
 	/**
 	 * Convert from image space to domain space.
