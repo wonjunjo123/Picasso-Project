@@ -46,7 +46,6 @@ public class ExpressionTreeGeneratorTests {
 	@Test
 	public void additionExpressionTests() {
 		ExpressionTreeNode e = parser.makeExpression("x + y");
-		ExpressionTreeNode test = new Addition(new X(), new Y());
 		assertEquals(new Addition(new X(), new Y()), e);
 		
 		// no spaces!
