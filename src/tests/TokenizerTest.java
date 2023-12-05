@@ -92,6 +92,7 @@ public class TokenizerTest {
 		assertEquals(new RightParenToken(), tokens.get(3));
 	}
 
+
 	@Test
 	public void testTokenizeCombinedFunctionExpression() {
 		String expression = "sin(floor(x))";
@@ -117,7 +118,7 @@ public class TokenizerTest {
 		assertEquals(new RightParenToken(), tokens.get(5));
 		assertEquals(new RightParenToken(), tokens.get(6));
 	}
-
+	
 	// TODO: Test arithmetic (rather than function-based) expressions ...
 
 }
