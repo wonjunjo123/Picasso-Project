@@ -42,5 +42,34 @@ public class Addition extends ExpressionTreeNode {
 
 		return new RGBColor(red, green, blue);
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+
+		if (!(o instanceof Addition)) {
+			return false;
+		}
+
+		// Make sure the objects are the same type
+
+		if (o.getClass() != this.getClass()) {
+			return false;
+		}
+
+		Addition ad = (Addition) o;
+
+		// check if their parameters are equal
+		if (this.left.equals(ad.left) && this.right.equals(ad.right)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+		//return true;
+	}
+	
 
 }

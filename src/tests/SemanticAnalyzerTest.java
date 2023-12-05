@@ -35,7 +35,7 @@ class SemanticAnalyzerTest {
 	void setUp() throws Exception {
 		semAnalyzer = SemanticAnalyzer.getInstance();
 	}
-	/*
+	
 	@Test
 	void testParseAddition() {
 
@@ -48,7 +48,7 @@ class SemanticAnalyzerTest {
 
 		assertEquals(new Addition(new X(), new Y()), actual);
 	}
-	*/
+
 	
 	@Test
 	void testParseCos() {
@@ -60,5 +60,17 @@ class SemanticAnalyzerTest {
 
 		assertEquals(new Cos(new X()), actual);
 	}
+	
+	@Test
+	void testParseClamp() {
+		Stack<Token> tokens = new Stack<>();
+		tokens.push(new IdentifierToken("x"));
+		tokens.push(new ClampToken());
+
+		ExpressionTreeNode actual = semAnalyzer.generateExpressionTree(tokens);
+
+		assertEquals(new Clamp(new X()), actual);
+	}
+
 
 }

@@ -47,7 +47,7 @@ public class ExpressionTreeGeneratorTests {
 	public void additionExpressionTests() {
 		ExpressionTreeNode e = parser.makeExpression("x + y");
 		assertEquals(new Addition(new X(), new Y()), e);
-
+		
 		// no spaces!
 		e = parser.makeExpression("x+y");
 		assertEquals(new Addition(new X(), new Y()), e);
@@ -99,6 +99,15 @@ public class ExpressionTreeGeneratorTests {
 		
 		e = parser.makeExpression("cos( x + y )");
 		assertEquals(new Cos(new Addition(new X(), new Y())), e); 
+	}
+	
+	@Test
+	public void clampFunctionTests() {
+		ExpressionTreeNode e = parser.makeExpression("clamp( x )");
+		assertEquals(new Clamp(new X()), e);
+		
+		e = parser.makeExpression("clamp( x + y )");
+		assertEquals(new Clamp(new Addition(new X(), new Y())), e); 
 	}
 
 }
