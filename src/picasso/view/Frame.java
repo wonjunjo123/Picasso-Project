@@ -36,16 +36,20 @@ public class Frame extends JFrame {
 		ButtonPanel commands = new ButtonPanel(canvas);
 		expressionTextField = new JTextField(40);
 		
+		ExpressionTreeGenerator expGen = new ExpressionTreeGenerator();
+		
 		commands.add("Open", new Reader());
 		commands.add("Evaluate", new ThreadedCommand<Pixmap>(canvas, new Evaluator()));
 		commands.add("Save", new Writer());
 		commands.add(expressionTextField);
-		
-		
+		expressionTextField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ThreadedCommand help = new ThreadedCommand<Pixmap>(canvas, new Evaluator());
+				help.execute(e);
+				System.out.println(expressionTextField.getText());
+		    }
+		});	
 	
-		
-		
-
 		// add our container to Frame and show it
 		getContentPane().add(canvas, BorderLayout.CENTER);
 		getContentPane().add(commands, BorderLayout.NORTH);
