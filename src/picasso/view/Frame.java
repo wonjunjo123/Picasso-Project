@@ -63,6 +63,10 @@ public class Frame extends JFrame {
 	public static String getExpressionText() {
 		return expressionTextField.getText();
 	}
+	
+	public static void setExpressionText(String s) {
+		expressionTextField.setText(s);
+	}
   
 }
 
