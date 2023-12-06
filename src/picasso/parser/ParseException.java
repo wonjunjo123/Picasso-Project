@@ -14,8 +14,8 @@ public class ParseException extends RuntimeException {
 	public ParseException(String message) {
 		super("ParseException: " + message);
 		String issue = "ParseException: " + message;
-		ErrorHandling unrecIdent = new ErrorHandling(issue);
-		unrecIdent.showError();
+		ErrorHandling parseEx = new ErrorHandling(issue);
+		parseEx.showError();
 	}
 
 }
