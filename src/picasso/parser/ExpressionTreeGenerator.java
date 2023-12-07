@@ -39,7 +39,7 @@ public class ExpressionTreeGenerator {
 		if (postfix.isEmpty()) {
 			return null;
 		}
-
+		
 		// System.out.println("Process postfix expression");
 		SemanticAnalyzer semAnalyzer = SemanticAnalyzer.getInstance();
 
@@ -94,6 +94,8 @@ public class ExpressionTreeGenerator {
 			if (token instanceof NumberToken) {
 				postfixResult.push(token);
 			} else if (token instanceof ColorToken) {
+				postfixResult.push(token);
+			} else if (token instanceof QuoteToken) {
 				postfixResult.push(token);
 			} else if (token instanceof IdentifierToken) {
 				postfixResult.push(token);
