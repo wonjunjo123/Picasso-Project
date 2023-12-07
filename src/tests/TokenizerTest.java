@@ -135,6 +135,32 @@ public class TokenizerTest {
 		assertEquals(new IdentifierToken("x"), tokens.get(2));
 		assertEquals(new PlusToken(), tokens.get(3));
 		assertEquals(new IdentifierToken("y"), tokens.get(4));
+		
+		expression = "x*y";
+		tokens = tokenizer.parseTokens(expression);
+		assertEquals(new IdentifierToken("x"), tokens.get(0));
+		assertEquals(new TimesToken(), tokens.get(1));
+		assertEquals(new IdentifierToken("y"), tokens.get(2));
+		
+		expression = "y * x * y";
+		tokens = tokenizer.parseTokens(expression);
+		assertEquals(new IdentifierToken("y"), tokens.get(0));
+		assertEquals(new TimesToken(), tokens.get(1));
+		assertEquals(new IdentifierToken("x"), tokens.get(2));
+		assertEquals(new TimesToken(), tokens.get(3));
+		assertEquals(new IdentifierToken("y"), tokens.get(4));
+		
+		expression = "y+(x+y)*x";
+		tokens = tokenizer.parseTokens(expression);
+		assertEquals(new IdentifierToken("y"), tokens.get(0));
+		assertEquals(new PlusToken(), tokens.get(1));
+		assertEquals(new LeftParenToken(), tokens.get(2));
+		assertEquals(new IdentifierToken("x"), tokens.get(3));
+		assertEquals(new PlusToken(), tokens.get(4));
+		assertEquals(new IdentifierToken("y"), tokens.get(5));
+		assertEquals(new RightParenToken(), tokens.get(6));
+		assertEquals(new TimesToken(), tokens.get(7));
+		assertEquals(new IdentifierToken("x"), tokens.get(8));
 	}
 	
 	// TODO: Test arithmetic (rather than function-based) expressions ...

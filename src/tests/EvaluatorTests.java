@@ -226,7 +226,7 @@ public class EvaluatorTests {
 	}
   
   @Test
-	public void testMultiplyEvaluation() {
+	public void testTimesEvaluation() {
 		Multiplication myTree = new Multiplication(new X(), new Y());
 
 		// some straightforward tests
