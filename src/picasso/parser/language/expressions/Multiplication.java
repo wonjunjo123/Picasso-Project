@@ -5,7 +5,6 @@ import picasso.parser.language.ExpressionTreeNode;
 /**
  * Represents the multiplication operator in the Picasso language.
  * 
- * @author Robert C. Duvall
  * @author Zachary Moore
  * 
  */
@@ -41,6 +40,33 @@ public class Multiplication extends ExpressionTreeNode {
 		double blue = result1.getBlue() * result2.getBlue();
 
 		return new RGBColor(red, green, blue);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+
+		if (!(o instanceof Multiplication)) {
+			return false;
+		}
+
+		// Make sure the objects are the same type
+
+		if (o.getClass() != this.getClass()) {
+			return false;
+		}
+
+		Multiplication mult = (Multiplication) o;
+
+		// check if their parameters are equal
+		if (this.left.equals(mult.left) && this.right.equals(mult.right)) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 
 }

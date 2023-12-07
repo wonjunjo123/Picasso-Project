@@ -7,8 +7,8 @@ import picasso.parser.tokens.chars.CharToken;
  * Represents the multiply sign token
  * 
  */
-public class MultiplyToken extends CharToken implements OperationInterface {
-	public MultiplyToken() {
+public class TimesToken extends CharToken implements OperationInterface {
+	public TimesToken() {
 		super(CharConstants.STAR);
 	}
 }

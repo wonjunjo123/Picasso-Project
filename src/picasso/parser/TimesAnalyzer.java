@@ -12,7 +12,7 @@ import picasso.parser.tokens.Token;
  * @author Zachary Moore
  * 
  */
-public class MultiplyAnalyzer implements SemanticAnalyzerInterface {
+public class TimesAnalyzer implements SemanticAnalyzerInterface {
 
 	@Override
 	public ExpressionTreeNode generateExpressionTree(Stack<Token> tokens) {
@@ -22,5 +22,4 @@ public class MultiplyAnalyzer implements SemanticAnalyzerInterface {
 		ExpressionTreeNode leftETN = SemanticAnalyzer.getInstance().generateExpressionTree(tokens);
 		return new Multiplication(leftETN, rightETN);
 	}
-
 }
