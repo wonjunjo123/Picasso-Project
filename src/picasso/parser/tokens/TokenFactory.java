@@ -45,6 +45,8 @@ public class TokenFactory {
 			case '[':
 				// parse a color token if it starts with a [
 				return parseColorToken(tokenizer);
+			case '\"':
+				return parseStringToken(tokenizer);
 			default:
 				Token ct = CharTokenFactory.getToken(result);
 
@@ -120,7 +122,63 @@ public class TokenFactory {
 
 		return new ColorToken(red.value(), green.value(), blue.value());
 	}
+	
+	private static ColorToken parseStringToken(StreamTokenizer tokenizer) {
+		Token r = parse(tokenizer);
+		if (!(r instanceof NumberToken)) {
+			throw new ParseException("Error parsing color, expected number");
+		}
 
+		Token comma = parse(tokenizer);
+		if (!(comma instanceof CommaToken)) {
+			throw new ParseException("Error parsing color, expected ,");
+		}
+
+		Token g = parse(tokenizer);
+		if (!(g instanceof NumberToken)) {
+			throw new ParseException("Error parsing color, expected number");
+		}
+		comma = parse(tokenizer);
+		if (!(comma instanceof CommaToken)) {
+			throw new ParseException("Error parsing color, expected ,");
+		}
+
+		Token b = parse(tokenizer);
+		if (!(b instanceof NumberToken)) {
+			throw new ParseException("Error parsing color, expected number");
+		}
+
+		Token rightBracket = parse(tokenizer);
+		if (!(rightBracket instanceof RightBracketToken)) {
+			throw new ParseException("Error parsing color, expected ] got " + rightBracket);
+		}
+
+		NumberToken red = (NumberToken) r;
+		NumberToken green = (NumberToken) g;
+		NumberToken blue = (NumberToken) b;
+
+		boolean error = false;
+		String errorMsg = "";
+
+		if (!ColorToken.isValidValue(red.value())) {
+			error = true;
+			errorMsg += "Red must be within range [-1,1]. ";
+		}
+		if (!ColorToken.isValidValue(green.value())) {
+			error = true;
+			errorMsg += "Green must be within range [-1,1]. ";
+		}
+		if (!ColorToken.isValidValue(blue.value())) {
+			error = true;
+			errorMsg += "Blue must be within range [-1,1].";
+		}
+		if (error) {
+			throw new ParseException(errorMsg);
+		}
+
+		return new ColorToken(red.value(), green.value(), blue.value());
+	}
+	
 	/**
 	 * Add the built-in functions as tokens
 	 */
