@@ -76,10 +76,9 @@ public class Image extends ExpressionTreeNode {
 	}
 	
 	/**
-	 * Evaluates this expression at the given x,y point by evaluating the addition of
-	 * the operator's two arguments.
+	 * Dummy method, since .evaluate of Image doesn't matter
 	 * 
-	 * @return the color from evaluating the addition of the two arguments
+	 * @return the color [0,0,0] as dummy placeholder
 	 */
 	@Override
 	public RGBColor evaluate(double x, double y) {

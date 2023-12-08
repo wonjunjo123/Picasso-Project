@@ -31,12 +31,6 @@ public class ImageToken extends Token {
 
 		this.imageName = imageName;
 	}
-	
-	/*
-	public static boolean isValidValue(double value) {
-		return (value >= -1 && value <= 1);
-	}
-	*/
 
 	/**
 	 * @return true iff o is a ImageToken with same imageName
@@ -46,11 +40,18 @@ public class ImageToken extends Token {
 		if (o == this) {
 			return true;
 		}
+		
 		if (!(o instanceof ImageToken)) {
 			return false;
 		}
+		
 		ImageToken other = (ImageToken) o;
-		return imageName == other.imageName;
+		
+		if (this.imageName.equals(other.imageName)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public String toString() {
