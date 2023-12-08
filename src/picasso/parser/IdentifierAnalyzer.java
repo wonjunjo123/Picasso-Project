@@ -41,8 +41,6 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 		}
 		if (mapped == null) {
 			String message = "Unrecognized Identifier Variable: " + id;
-			ErrorHandling unrecIdent = new ErrorHandling(message);
-			unrecIdent.showError();
 			throw new ParseException(message);
 		}
 
