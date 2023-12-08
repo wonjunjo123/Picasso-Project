@@ -244,6 +244,38 @@ public class EvaluatorTests {
 		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1, 1));
 
 	}
+  @Test
+	public void testAssignmentEvaluation() {
+		Addition add = new Addition(new X(), new Y());
+		Multiplication times =  new Multiplication(new X(), new Y());
+		Floor floor = new Floor(new X());
+		Ceil ceil = new Ceil(new X());
+		Cos cos = new Cos(new X());
+		Sine sin = new Sine(new X());
+		Clamp clamp = new Clamp(new X());
+		Abs abs = new Abs(new X());
+		
+		Assignment addTree = new Assignment(new Variable ("a"), add);
+		Assignment timesTree = new Assignment(new Variable ("b"), times);
+		Assignment floorTree = new Assignment(new Variable ("c"), floor);
+		Assignment ceilTree = new Assignment(new Variable ("d"), ceil);
+		Assignment cosTree = new Assignment(new Variable ("e"), cos);
+		Assignment sinTree = new Assignment(new Variable ("f"), sin);
+		Assignment clampTree = new Assignment(new Variable ("g"), clamp);
+		Assignment absTree = new Assignment(new Variable ("h"), abs);
+		
+		assertEquals(add.evaluate(1, 0), addTree.evaluate(1, 0));
+		assertEquals(times.evaluate(1, 0.5), timesTree.evaluate(1, 0.5));
+		assertEquals(floor.evaluate(.4, 0.4), floorTree.evaluate(.4, 0.4));
+		assertEquals(ceil.evaluate(0.5, 0.5), ceilTree.evaluate(0.5, 0.5));
+		assertEquals(cos.evaluate(1, 0.5), cosTree.evaluate(1, 0.5));
+		assertEquals(sin.evaluate(.4, -1), sinTree.evaluate(.4, -1));
+		assertEquals(clamp.evaluate(0.5, 0.5), clampTree.evaluate(0.5, 0.5));
+		assertEquals(abs.evaluate(-1, -1), absTree.evaluate(-1, -1));
+		
+		
+  }
+		
 }
   
   
