@@ -164,6 +164,16 @@ public class TokenizerTest {
 	}
 	
 	@Test
+	public void TestTokenizeAssignment() {
+		String expression = "a = x+y";
+		tokens = tokenizer.parseTokens(expression);
+		assertEquals(new IdentifierToken("a"), tokens.get(0));
+		assertEquals(new AssignmentToken(), tokens.get(1));
+		assertEquals(new IdentifierToken("x"), tokens.get(2));
+		assertEquals(new PlusToken(), tokens.get(3));
+		assertEquals(new IdentifierToken("y"), tokens.get(4));
+	}
+
 	public void testTokenizeImageWrapExpression() {
 		
 		String expression = "imageWrap(\"vortex.jpg\",x+x,y)";

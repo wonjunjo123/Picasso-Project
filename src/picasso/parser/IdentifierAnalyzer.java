@@ -57,5 +57,9 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 		// Is that an error? Or, could there a valid reason?
 		return null;
 	}
+	
+	public static void storeAssignmentResult(String variable, ExpressionTreeNode result) {
+		idToExpression.put(variable, result); 
+	}
 
 }
