@@ -14,6 +14,7 @@ import picasso.parser.language.expressions.*;
 import picasso.parser.tokens.IdentifierToken;
 import picasso.parser.tokens.Token;
 import picasso.parser.tokens.operations.PlusToken;
+import picasso.parser.tokens.operations.TimesToken;
 
 /**
  * Tests of creating an expression tree from a string expression. Will have
@@ -93,7 +94,7 @@ public class ExpressionTreeGeneratorTests {
 		expected.push(new IdentifierToken("x"));
 		expected.push(new IdentifierToken("y"));
 		expected.push(new IdentifierToken("x"));
-		// expected.push(new MultiplyToken());
+		expected.push(new TimesToken());
 		expected.push(new PlusToken());
 
 		assertEquals(expected, stack);
@@ -152,6 +153,21 @@ public class ExpressionTreeGeneratorTests {
 		
 		e = parser.makeExpression("abs( x + y )");
 		assertEquals(new Abs(new Addition(new X(), new Y())), e);
+	}
+	
+	@Test
+	public void imageWrapFunctionTests() {
+		ExpressionTreeNode e = parser.makeExpression("imageWrap(\"vortex.jpg\",x,y)");
+		assertEquals(new ImageWrap(new Image("vortex.jpg"), new X(), new Y()), e);
+		
+		e = parser.makeExpression("imageWrap(\"vortex.jpg\",x+x,y+y)");
+		assertEquals(new ImageWrap(new Image("vortex.jpg"), new Addition(new X(), new X()), new Addition(new Y(), new Y())), e);
+	}
+	
+	@Test
+	public void imageFunctionTests() {
+		ExpressionTreeNode e = parser.makeExpression("\"vortex.jpg\"");
+		assertEquals(new Image("vortex.jpg"), e);
 	}
 
 }
