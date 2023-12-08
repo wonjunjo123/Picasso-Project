@@ -14,6 +14,7 @@ import picasso.parser.language.expressions.*;
 import picasso.parser.tokens.IdentifierToken;
 import picasso.parser.tokens.Token;
 import picasso.parser.tokens.operations.PlusToken;
+import picasso.parser.tokens.operations.TimesToken;
 
 /**
  * Tests of creating an expression tree from a string expression. Will have
@@ -93,7 +94,7 @@ public class ExpressionTreeGeneratorTests {
 		expected.push(new IdentifierToken("x"));
 		expected.push(new IdentifierToken("y"));
 		expected.push(new IdentifierToken("x"));
-		// expected.push(new MultiplyToken());
+		expected.push(new TimesToken());
 		expected.push(new PlusToken());
 
 		assertEquals(expected, stack);
@@ -152,6 +153,15 @@ public class ExpressionTreeGeneratorTests {
 		
 		e = parser.makeExpression("abs( x + y )");
 		assertEquals(new Abs(new Addition(new X(), new Y())), e);
+	}
+	
+	@Test
+	public void assignmentExpressionTests() {
+		ExpressionTreeNode actual = parser.makeExpression("a = x");
+		assertEquals(new Assignment(new Variable("a"), new X()), actual);
+		
+		ExpressionTreeNode e = parser.makeExpression("a = x + y");
+		assertEquals(new Assignment(new Variable("a"), new Addition(new X(), new Y())), e);
 	}
 
 }
