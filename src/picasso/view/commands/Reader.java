@@ -28,7 +28,6 @@ public class Reader extends FileCommand<Pixmap> {
 	 * @param dialogType
 	 */
 
-
 	/**
 	 * Displays the image file on the given target.
 	 */
@@ -37,18 +36,16 @@ public class Reader extends FileCommand<Pixmap> {
 		if (fileName != null) {
 			String currLine;
 			try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-				String expression; 
+				String expression;
 				while ((currLine = br.readLine()) != null) {
-					if (currLine.contains("//")) {
-						continue;
-					}
-				expression = currLine;
-				System.out.println(expression);
-				Frame.setExpressionText(expression);
-				new Evaluator().execute(target);
+					expression = currLine;
+					System.out.println(expression);
+					Frame.setExpressionText(expression);
+					new Evaluator().execute(target);
 				}
 			} catch (IOException e) {
 				System.out.println(e);
+				//Come back to this later
 			}
 		}
 	}
