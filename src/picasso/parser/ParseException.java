@@ -13,8 +13,7 @@ public class ParseException extends RuntimeException {
 
 	public ParseException(String message) {
 		super("ParseException: " + message);
-		String issue = "ParseException: " + message;
-		ErrorHandling parseEx = new ErrorHandling(issue);
+		ErrorHandling parseEx = new ErrorHandling(message);
 		parseEx.showError();
 	}
 

@@ -28,7 +28,7 @@ public class ErrorHandling {
 	 * shows the user the error message and prompts them to try another input
 	 */
 	public void showError() {
-		errorFrame = new JFrame(message);
+		errorFrame = new JFrame("Encountered an Error");
 		errorLabel = new JLabel();
 		errorLabel2 = new JLabel();
 		errorLabel.setHorizontalAlignment(JLabel.CENTER);
