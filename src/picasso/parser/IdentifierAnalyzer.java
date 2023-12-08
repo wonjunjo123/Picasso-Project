@@ -9,6 +9,9 @@ import picasso.parser.language.expressions.X;
 import picasso.parser.language.expressions.Y;
 import picasso.parser.tokens.IdentifierToken;
 import picasso.parser.tokens.Token;
+import picasso.view.ErrorHandling;
+
+import javax.swing.*;
 
 /**
  * Handle an identifier token 
@@ -19,13 +22,23 @@ import picasso.parser.tokens.Token;
 public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 
 	static Map<String, ExpressionTreeNode> idToExpression = new HashMap<String, ExpressionTreeNode>();
-
+	
+	final JFrame parent = new JFrame();
 	static {
 		// We always have x and y defined.
 		idToExpression.put("x", new X());
 		idToExpression.put("y", new Y());
 	}
-
+	
+	/**
+	 * creates an expression tree node from a stack of tokens. Will prompt the user
+	 * to enter a different input if there are any parsing errors
+	 * 		will throw a ParseException if unrecognized identifier analyzer
+	 * 
+	 * @param tokens
+	 * @return
+	 * @see picasso.parser.SemanticAnalyzerInterface#generateExpressionTree(java.util.Stack)
+	 */
 	@Override
 	public ExpressionTreeNode generateExpressionTree(Stack<Token> tokens) {
 		IdentifierToken t = (IdentifierToken) tokens.pop();
@@ -36,7 +49,8 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 			return mapped;
 		}
 		if (mapped == null) {
-			throw new ParseException("Unrecognized Identifier Variable");
+			String message = "Unrecognized Identifier Variable: " + id;
+			throw new ParseException(message);
 		}
 
 		// TODO : What should we do if we don't recognize the identifier?

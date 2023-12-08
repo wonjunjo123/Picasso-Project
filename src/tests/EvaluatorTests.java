@@ -224,5 +224,28 @@ public class EvaluatorTests {
 			assertEquals(colors[i].getBlue(), sinCols[i].getBlue(), 0.0001);
 		}
 	}
+  
+  @Test
+	public void testTimesEvaluation() {
+		Multiplication myTree = new Multiplication(new X(), new Y());
+
+		// some straightforward tests
+		assertEquals(new RGBColor(0.05, 0.05, 0.05), myTree.evaluate(-0.5, -0.1));
+		assertEquals(new RGBColor(0.81, 0.81, 0.81), myTree.evaluate(0.9, 0.9));
+		assertEquals(new RGBColor(-0.18, -0.18, -0.18), myTree.evaluate(-0.6, 0.3));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0.3));
+		
+		// test the ints; 
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(1, 0));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, -1));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0));
+		assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(1, -1));
+		assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(-1, 1));
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1, 1));
+
+	}
 }
+  
+  
+  
 
