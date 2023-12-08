@@ -52,9 +52,6 @@ public class ImageWrap extends ExpressionTreeNode {
 		int xPixel = coorToPixel(xWrap, image.mySize.width);
 		int yPixel = coorToPixel(yWrap, image.mySize.height);
 		
-		System.out.println("(xPixel,yPixel): " + xPixel + ", " + yPixel);
-		
-		
 		Color origColor = image.getColor(xPixel,yPixel);
 		
 		return new RGBColor(origColor);
@@ -87,29 +84,16 @@ public class ImageWrap extends ExpressionTreeNode {
 	 * @return an int pixel corresponding proportionally to the coordinates
 	 */
 	private static int coorToPixel(double val, int length) {
-		System.out.println("!!!: " + ((val+1)/2)*length);
 		return (int) (((val+1)/2)*length);
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(coorToPixel(-1, 1000));
-		System.out.println(coorToPixel(-0.5, 1000));
-		System.out.println(coorToPixel(0, 1000));
-		System.out.println(coorToPixel(0.5, 1000));
-		System.out.println(coorToPixel(1, 1000));
-		//ExpressionTreeNode root = new ImageWrap(new Image("vortex.png"), new Addition(new X(), new X()), new Y());
-		//RGBColor PIXELCOLOR = root.evaluate(-1, -1);
-		//System.out.println(PIXELCOLOR);
-	}
-	
-	/*@Override
-	 
+	@Override
 	public boolean equals(Object o) {
 		if (o == this) {
 			return true;
 		}
 
-		if (!(o instanceof Addition)) {
+		if (!(o instanceof ImageWrap)) {
 			return false;
 		}
 
@@ -119,18 +103,15 @@ public class ImageWrap extends ExpressionTreeNode {
 			return false;
 		}
 
-		Addition ad = (Addition) o;
+		ImageWrap imgWrap = (ImageWrap) o;
 
 		// check if their parameters are equal
-		if (this.left.equals(ad.left) && this.right.equals(ad.right)) {
+		if (this.image.equals(imgWrap.image) && this.xExpr.equals(imgWrap.xExpr) && this.yExpr.equals(imgWrap.yExpr)) {
 			return true;
 		} else {
 			return false;
 		}
-		
-		//return true;
 	}
-	*/
 	
 
 }
