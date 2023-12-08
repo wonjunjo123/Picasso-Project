@@ -12,6 +12,7 @@ import picasso.parser.language.BuiltinFunctionsReader;
 import picasso.parser.tokens.chars.CommaToken;
 import picasso.parser.tokens.chars.LeftBracketToken;
 import picasso.parser.tokens.chars.RightBracketToken;
+import picasso.parser.tokens.chars.QuoteToken;
 
 /**
  * Looks at a generic token and creates the appropriate token type
@@ -46,14 +47,14 @@ public class TokenFactory {
 				// parse a color token if it starts with a [
 				return parseColorToken(tokenizer);
 			case '\"':
-				return parseStringToken(tokenizer);
+				// parse a Image token if it starts with " (AKA quoted string token)
+				return parseImageToken(tokenizer);
 			default:
 				Token ct = CharTokenFactory.getToken(result);
 
 				return ct;
 			}
 			
-			// TODO: Handle quoted strings
 			// Others?
 
 		} catch (IOException io) {
@@ -123,60 +124,14 @@ public class TokenFactory {
 		return new ColorToken(red.value(), green.value(), blue.value());
 	}
 	
-	private static ColorToken parseStringToken(StreamTokenizer tokenizer) {
-		Token r = parse(tokenizer);
-		if (!(r instanceof NumberToken)) {
-			throw new ParseException("Error parsing color, expected number");
-		}
-
-		Token comma = parse(tokenizer);
-		if (!(comma instanceof CommaToken)) {
-			throw new ParseException("Error parsing color, expected ,");
-		}
-
-		Token g = parse(tokenizer);
-		if (!(g instanceof NumberToken)) {
-			throw new ParseException("Error parsing color, expected number");
-		}
-		comma = parse(tokenizer);
-		if (!(comma instanceof CommaToken)) {
-			throw new ParseException("Error parsing color, expected ,");
-		}
-
-		Token b = parse(tokenizer);
-		if (!(b instanceof NumberToken)) {
-			throw new ParseException("Error parsing color, expected number");
-		}
-
-		Token rightBracket = parse(tokenizer);
-		if (!(rightBracket instanceof RightBracketToken)) {
-			throw new ParseException("Error parsing color, expected ] got " + rightBracket);
-		}
-
-		NumberToken red = (NumberToken) r;
-		NumberToken green = (NumberToken) g;
-		NumberToken blue = (NumberToken) b;
-
-		boolean error = false;
-		String errorMsg = "";
-
-		if (!ColorToken.isValidValue(red.value())) {
-			error = true;
-			errorMsg += "Red must be within range [-1,1]. ";
-		}
-		if (!ColorToken.isValidValue(green.value())) {
-			error = true;
-			errorMsg += "Green must be within range [-1,1]. ";
-		}
-		if (!ColorToken.isValidValue(blue.value())) {
-			error = true;
-			errorMsg += "Blue must be within range [-1,1].";
-		}
-		if (error) {
-			throw new ParseException(errorMsg);
-		}
-
-		return new ColorToken(red.value(), green.value(), blue.value());
+	/**
+	 * Parse a ImageToken
+	 * 
+	 * @param tokenizer
+	 * @return 
+	 */
+	private static ImageToken parseImageToken(StreamTokenizer tokenizer) {
+		return new ImageToken(tokenizer.sval);
 	}
 	
 	/**
