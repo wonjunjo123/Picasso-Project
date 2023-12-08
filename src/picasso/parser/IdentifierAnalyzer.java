@@ -29,7 +29,16 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 		idToExpression.put("x", new X());
 		idToExpression.put("y", new Y());
 	}
-
+	
+	/**
+	 * creates an expression tree node from a stack of tokens. Will prompt the user
+	 * to enter a different input if there are any parsing errors
+	 * 		will throw a ParseException if unrecognized identifier analyzer
+	 * 
+	 * @param tokens
+	 * @return
+	 * @see picasso.parser.SemanticAnalyzerInterface#generateExpressionTree(java.util.Stack)
+	 */
 	@Override
 	public ExpressionTreeNode generateExpressionTree(Stack<Token> tokens) {
 		IdentifierToken t = (IdentifierToken) tokens.pop();

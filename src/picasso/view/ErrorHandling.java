@@ -18,11 +18,15 @@ public class ErrorHandling {
 
 	/**
 	 * Creates a pop up window to help the user understand the error
+	 * 
+	 * @param String - message
 	 */
 	public ErrorHandling(String message) {
 		this.message = message;
 	}
-	
+	/**
+	 * shows the user the error message and prompts them to try another input
+	 */
 	public void showError() {
 		errorFrame = new JFrame(message);
 		errorLabel = new JLabel();
