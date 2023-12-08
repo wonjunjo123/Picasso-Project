@@ -1,6 +1,9 @@
 package picasso.parser.language.expressions;
 
 import picasso.parser.language.ExpressionTreeNode;
+import picasso.parser.language.expressions.Image;
+
+import java.awt.Color;
 
 /**
  * Represents the imageWrap function in the Picasso language.
@@ -11,7 +14,7 @@ import picasso.parser.language.ExpressionTreeNode;
 public class ImageWrap extends ExpressionTreeNode {
 	
 	// String filename;
-	Image filename;
+	Image image;
 	ExpressionTreeNode xExpr;
 	ExpressionTreeNode yExpr;
 	
@@ -19,11 +22,11 @@ public class ImageWrap extends ExpressionTreeNode {
 	/**
 	 * Create a imageWrap expression that takes as a parameter the filename as well as the x and y expressions
 	 * 
-	 * @param left the first one to add
-	 * @param right the second one to add
+	 * @param xExpr x expression
+	 * @param yExpr y expression
 	 */
-	public ImageWrap(Image filename, ExpressionTreeNode xExpr, ExpressionTreeNode yExpr) {
-		this.filename = filename;
+	public ImageWrap(Image image, ExpressionTreeNode xExpr, ExpressionTreeNode yExpr) {
+		this.image = image;
 		this.xExpr = xExpr;
 		this.yExpr = yExpr;
 	}
@@ -36,14 +39,67 @@ public class ImageWrap extends ExpressionTreeNode {
 	 */
 	@Override
 	public RGBColor evaluate(double x, double y) {
+		
 		RGBColor result1 = xExpr.evaluate(x, y);
 		RGBColor result2 = yExpr.evaluate(x, y);
 		
-		double red = result1.getRed() + result2.getRed();
-		double green = result1.getGreen() + result2.getGreen();
-		double blue = result1.getBlue() + result2.getBlue();
-
-		return new RGBColor(red, green, blue);
+		double xEval = (result1.getRed() + result1.getGreen() + result1.getBlue())/3;
+		double yEval = (result2.getRed() + result2.getGreen() + result2.getBlue())/3;
+		
+		double xWrap = wrapAround(xEval);
+		double yWrap = wrapAround(yEval);
+		
+		int xPixel = coorToPixel(xWrap, image.mySize.width);
+		int yPixel = coorToPixel(yWrap, image.mySize.height);
+		
+		System.out.println("(xPixel,yPixel): " + xPixel + ", " + yPixel);
+		
+		
+		Color origColor = image.getColor(xPixel,yPixel);
+		
+		return new RGBColor(origColor);
+	}
+	
+	/**
+	 * Wraps a double around [-1, 1]
+	 * In other words, the amount that exceeds boundaries is added again 
+	 * to the other side of the boundary until amount does not exceed boundary 
+	 * 
+	 * @param val a double to be wrapped around
+	 * @return a double that is wrapped around [-1, 1]
+	 */
+	private static double wrapAround(double val) {
+		double result = val;
+		if (val > 1) {
+			result = -1 + (val - 1)%2;
+		} else if (val < -1) {
+			result = 1 - (-1 - val)%2;
+		}
+		return result;
+	}
+	
+	/**
+	 * Converts a coordinate [-1, 1] to int pixels from 0 to length
+	 * length can either by image width or image height
+	 * 
+	 * @param val 
+	 * @param length the width or height of the image
+	 * @return an int pixel corresponding proportionally to the coordinates
+	 */
+	private static int coorToPixel(double val, int length) {
+		System.out.println("!!!: " + ((val+1)/2)*length);
+		return (int) (((val+1)/2)*length);
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(coorToPixel(-1, 1000));
+		System.out.println(coorToPixel(-0.5, 1000));
+		System.out.println(coorToPixel(0, 1000));
+		System.out.println(coorToPixel(0.5, 1000));
+		System.out.println(coorToPixel(1, 1000));
+		//ExpressionTreeNode root = new ImageWrap(new Image("vortex.png"), new Addition(new X(), new X()), new Y());
+		//RGBColor PIXELCOLOR = root.evaluate(-1, -1);
+		//System.out.println(PIXELCOLOR);
 	}
 	
 	/*@Override
