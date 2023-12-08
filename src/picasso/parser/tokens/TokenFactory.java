@@ -12,6 +12,7 @@ import picasso.parser.language.BuiltinFunctionsReader;
 import picasso.parser.tokens.chars.CommaToken;
 import picasso.parser.tokens.chars.LeftBracketToken;
 import picasso.parser.tokens.chars.RightBracketToken;
+import picasso.parser.tokens.chars.QuoteToken;
 
 /**
  * Looks at a generic token and creates the appropriate token type
@@ -45,13 +46,15 @@ public class TokenFactory {
 			case '[':
 				// parse a color token if it starts with a [
 				return parseColorToken(tokenizer);
+			case '\"':
+				// parse a Image token if it starts with " (AKA quoted string token)
+				return parseImageToken(tokenizer);
 			default:
 				Token ct = CharTokenFactory.getToken(result);
 
 				return ct;
 			}
 			
-			// TODO: Handle quoted strings
 			// Others?
 
 		} catch (IOException io) {
@@ -120,7 +123,17 @@ public class TokenFactory {
 
 		return new ColorToken(red.value(), green.value(), blue.value());
 	}
-
+	
+	/**
+	 * Parse a ImageToken
+	 * 
+	 * @param tokenizer
+	 * @return 
+	 */
+	private static ImageToken parseImageToken(StreamTokenizer tokenizer) {
+		return new ImageToken(tokenizer.sval);
+	}
+	
 	/**
 	 * Add the built-in functions as tokens
 	 */

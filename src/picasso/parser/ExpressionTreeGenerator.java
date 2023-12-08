@@ -35,11 +35,10 @@ public class ExpressionTreeGenerator {
 	 */
 	public ExpressionTreeNode makeExpression(String infix) {
 		Stack<Token> postfix = infixToPostfix(infix);
-		
 		if (postfix.isEmpty()) {
 			return null;
 		}
-
+		
 		// System.out.println("Process postfix expression");
 		SemanticAnalyzer semAnalyzer = SemanticAnalyzer.getInstance();
 
@@ -80,7 +79,7 @@ public class ExpressionTreeGenerator {
 		// Needed to handle identifiers and colors, which aren't in the original
 		// algorithm.
 		// May need to modify/update further...
-
+		
 		Stack<Token> operators = new Stack<Token>();
 		Stack<Token> postfixResult = new Stack<Token>();
 
@@ -94,6 +93,10 @@ public class ExpressionTreeGenerator {
 			if (token instanceof NumberToken) {
 				postfixResult.push(token);
 			} else if (token instanceof ColorToken) {
+				postfixResult.push(token);
+			} else if (token instanceof ImageToken) {
+				postfixResult.push(token);
+			} else if (token instanceof QuoteToken) {
 				postfixResult.push(token);
 			} else if (token instanceof IdentifierToken) {
 				postfixResult.push(token);

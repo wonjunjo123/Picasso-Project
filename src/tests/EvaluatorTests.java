@@ -244,6 +244,7 @@ public class EvaluatorTests {
 		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1, 1));
 
 	}
+
   @Test
 	public void testAssignmentEvaluation() {
 		Addition add = new Addition(new X(), new Y());
@@ -275,7 +276,24 @@ public class EvaluatorTests {
 		
 		
   }
+  
+  	@Test
+	public void testImageWrapEvaluation() {
+  		ImageWrap myTree = new ImageWrap(new Image("vortex.jpg"), new Addition(new X(), new X()), new Y());
 		
+  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(-1,-1));
+  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(0,-1));
+  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(1,-1));
+  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(-1,0));
+  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(0,0));
+  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(1,0));
+  		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(-1,1));
+  		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(0,1));
+  		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(1,1));
+		
+	}
+  	
+
 }
   
   

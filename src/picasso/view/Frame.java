@@ -40,8 +40,6 @@ public class Frame extends JFrame {
 				Evaluator evaluator = new Evaluator();
 				evaluator.execute(canvas.getPixmap());
 				canvas.refresh();
-				//String test = expressionTextField.getText();
-				//System.out.println(test);
 		    }
 		});
 		commands.add("Open", new Reader());
@@ -62,6 +60,10 @@ public class Frame extends JFrame {
 	
 	public static String getExpressionText() {
 		return expressionTextField.getText();
+	}
+	
+	public static void setExpressionText(String s) {
+		expressionTextField.setText(s);
 	}
   
 }
