@@ -65,6 +65,13 @@ public class SemanticAnalyzer implements SemanticAnalyzerInterface {
 		tokenName = TOKENS_PACKAGE_NAME + "ColorToken";
 		parserName = PARSER_PACKAGE + "ColorAnalyzer";
 		addSemanticAnalyzerMapping(tokenName, parserName);
+		
+		// Image mapping
+		
+		tokenName = TOKENS_PACKAGE_NAME + "ImageToken";
+		parserName = PARSER_PACKAGE + "ImageAnalyzer";
+		addSemanticAnalyzerMapping(tokenName, parserName);
+		
 
 		// TODO: Are there any others that should be added?
 		// Is there a better way to create this mapping?
