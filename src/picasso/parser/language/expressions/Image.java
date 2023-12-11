@@ -26,7 +26,7 @@ public class Image extends ExpressionTreeNode {
 	String filename;
 	BufferedImage myImage;
 	Dimension mySize;
-	String absPath;
+	File directory;
 	
 	/**
 	 * Create a image ETN that takes as a parameter the filename
@@ -35,10 +35,11 @@ public class Image extends ExpressionTreeNode {
 	 */
 	public Image(String filename) {
 		this.filename = filename;
-		this.absPath = "/Users/wonjunjo/git/picasso-invincibles/images/" + filename;
+		this.directory = new File("images/"); 
+		// One of the method overloads for File is taking a parent file object as arg1 and String of child file as arg2
 		
 		try {
-			this.myImage = ImageIO.read(new File(absPath));
+			this.myImage = ImageIO.read(new File(directory, filename));
 			this.mySize = new Dimension(myImage.getWidth(), myImage.getHeight());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -82,7 +83,8 @@ public class Image extends ExpressionTreeNode {
 	 */
 	@Override
 	public RGBColor evaluate(double x, double y) {
-		return new RGBColor(0, 0, 0);
+		// make getColor
+		return new RGBColor(0, 0, 1);
 	}
 	
 	@Override
