@@ -35,18 +35,24 @@ public class Reader extends FileCommand<Pixmap> {
 		String fileName = getFileName();
 		if (fileName != null) {
 			String currLine;
-			try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-				String expression;
-				while ((currLine = br.readLine()) != null) {
-					expression = currLine;
-					System.out.println(expression);
-					Frame.setExpressionText(expression);
-					new Evaluator().execute(target);
+			int i = fileName.length();
+			if (fileName.subSequence(i-3, i).equals("exp")) {
+				try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+					String expression;
+					while ((currLine = br.readLine()) != null) {
+						expression = currLine;
+						System.out.println(expression);
+						Frame.setExpressionText(expression);
+						new Evaluator().execute(target);
+					}
+				} catch (IOException e) {
+					System.out.println(e);
+					//Come back to this later
 				}
-			} catch (IOException e) {
-				System.out.println(e);
-				//Come back to this later
+			} else {
+				target.read(fileName);
 			}
+			
 		}
 	}
 }
