@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.*;
 
 import picasso.model.Pixmap;
-import picasso.parser.ExpressionTreeGenerator;
 import picasso.util.ThreadedCommand;
 import picasso.view.commands.*;
 
@@ -22,7 +21,6 @@ import picasso.view.commands.*;
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
 	private static JTextField expressionTextField;
-	private JButton validateButton;
 	public Frame(Dimension size) {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -42,13 +40,14 @@ public class Frame extends JFrame {
 				canvas.refresh();
 		    }
 		});
+
 		commands.add("Open", new Reader());
 		commands.add("Evaluate", new ThreadedCommand<Pixmap>(canvas, new Evaluator()));
 		commands.add("Save", new Writer());
 		commands.add(expressionTextField);
 		
 		
-	
+		
 		
 		
 
