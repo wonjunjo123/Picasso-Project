@@ -37,7 +37,6 @@ public class Image extends ExpressionTreeNode {
 		this.filename = filename;
 		this.directory = new File("images/"); 
 		// One of the method overloads for File is taking a parent file object as arg1 and String of child file as arg2
-		
 		try {
 			this.myImage = ImageIO.read(new File(directory, filename));
 			this.mySize = new Dimension(myImage.getWidth(), myImage.getHeight());
@@ -77,14 +76,19 @@ public class Image extends ExpressionTreeNode {
 	}
 	
 	/**
-	 * Dummy method, since .evaluate of Image doesn't matter
+	 * Returns the RGBColor of an image at a given x,y coordinate
 	 * 
-	 * @return the color [0,0,0] as dummy placeholder
+	 * @param x the x coordinate of the image
+	 * @param y the y coordinate of the image
+	 * @return the color of the image at given x,y coordinates
 	 */
 	@Override
 	public RGBColor evaluate(double x, double y) {
-		// make getColor
-		return new RGBColor(0, 0, 1);
+		
+		int xPixel = coorToPixel(x, this.mySize.width);
+		int yPixel = coorToPixel(y, this.mySize.height);
+		Color origColor = this.getColor(xPixel,yPixel);
+		return new RGBColor(origColor);
 	}
 	
 	@Override
@@ -113,6 +117,22 @@ public class Image extends ExpressionTreeNode {
 		}
 		
 		//return true;
+	}
+	
+	/**
+	 * Converts a coordinate [-1, 1] to int pixels from 0 to length
+	 * length can either by image width or image height
+	 * 
+	 * @param val 
+	 * @param length the width or height of the image
+	 * @return an int pixel corresponding proportionally to the coordinates
+	 */
+	private static int coorToPixel(double val, int length) {
+		// if we add 1 to val, the range of val will be [0,2].
+		// Dividing that range by 2 will return the proportional length of val from 0 to 2 as a percentage.
+		// Multiplying that proportion by the pixel length (either width or height)
+		// will return the pixel corresponding to the val
+		return (int) (((val+1)/2)*length);
 	}
 	
 	
