@@ -7,27 +7,26 @@ import java.util.Stack;
 import picasso.parser.language.ExpressionTreeNode;
 import picasso.parser.language.expressions.X;
 import picasso.parser.language.expressions.Y;
-import picasso.parser.tokens.IdentifierToken;
+import picasso.parser.tokens.*;
 import picasso.parser.tokens.Token;
-import picasso.view.ErrorHandling;
 
 import javax.swing.*;
 
 /**
- * Handle an identifier token 
+ * Handle an word token 
  * 
- * @author Sara Sprenkle
+ * @author Nick Lagges
  *
  */
-public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
+public class WordAnalyzer implements SemanticAnalyzerInterface {
 
-	static Map<String, ExpressionTreeNode> idToExpression = new HashMap<String, ExpressionTreeNode>();
+	static Map<String, ExpressionTreeNode> wordToExpression = new HashMap<String, ExpressionTreeNode>();
 	
 	final JFrame parent = new JFrame();
 	static {
 		// We always have x and y defined.
-		idToExpression.put("x", new X());
-		idToExpression.put("y", new Y());
+		wordToExpression.put("x", new X());
+		wordToExpression.put("y", new Y());
 	}
 	
 	/**
@@ -42,11 +41,11 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 	@Override
 	public ExpressionTreeNode generateExpressionTree(Stack<Token> tokens) {
 		Token token = tokens.pop();
-		IdentifierToken t = (IdentifierToken) token;
+		WordToken t = (WordToken) token;
 		String id = t.getName();
 		//System.out.println(id);
-		ExpressionTreeNode mapped = idToExpression.get(id);
-		
+		ExpressionTreeNode mapped = wordToExpression.get(id);
+		System.out.println(t);
 		if (mapped != null) {
 			return mapped;
 		}
@@ -82,7 +81,7 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 	}
 	
 	public static void storeAssignmentResult(String variable, ExpressionTreeNode result) {
-		idToExpression.put(variable, result); 
+		wordToExpression.put(variable, result); 
 	}
 
 }

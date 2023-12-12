@@ -38,10 +38,15 @@ public class TokenFactory {
 				Token t = tokenNameToToken.get(tokenizer.sval);
 
 				// If there is no token with a function name, the token must be
-				// an identifier
-				if (t == null) {
+				// a string, unless it is x or y
+				System.out.println(tokenizer.sval);
+				if ( (t == null) && ( (tokenizer.sval.equals("x") || (tokenizer.sval.equals("y") ) ) ) ) {
 					return new IdentifierToken(tokenizer.sval);
 				}
+				else if ( ( t == null) && ( !(tokenizer.sval.equals("x")) && !(tokenizer.sval.equals("y") ) ) ){
+					return new WordToken(tokenizer.sval);
+				}
+				System.out.println("end");
 				return t;
 			case '[':
 				// parse a color token if it starts with a [

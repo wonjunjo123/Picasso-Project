@@ -128,9 +128,10 @@ public class Tokenizer {
 	 */
 	public static void main(String[] args) {
 		String expression = "sin(floor(x + y)) //+ [ -1, 1, 1] /* test */";
+		String testing = "a";
 
 		Tokenizer tokenizer = new Tokenizer();
-		System.out.println("Tokens" + tokenizer.parseTokens(expression));
+		System.out.println("Tokens" + tokenizer.parseTokens(testing));
 	}
 
 }
