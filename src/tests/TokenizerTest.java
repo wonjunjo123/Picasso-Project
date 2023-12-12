@@ -105,7 +105,6 @@ public class TokenizerTest {
 		assertEquals(new IdentifierToken("x"), tokens.get(4));
 		assertEquals(new RightParenToken(), tokens.get(5));
 		assertEquals(new RightParenToken(), tokens.get(6));
-
 		
 		expression = "cos(abs(x))";
 		tokens = tokenizer.parseTokens(expression);
@@ -118,6 +117,16 @@ public class TokenizerTest {
 		assertEquals(new RightParenToken(), tokens.get(5));
 		assertEquals(new RightParenToken(), tokens.get(6));
 		
+		expression = "tan(atan(x))";
+		tokens = tokenizer.parseTokens(expression);
+		// TODO: Check the tokens...
+		assertEquals(new TanToken(), tokens.get(0));
+		assertEquals(new LeftParenToken(), tokens.get(1));
+		assertEquals(new AtanToken(), tokens.get(2));
+		assertEquals(new LeftParenToken(), tokens.get(3));
+		assertEquals(new IdentifierToken("x"), tokens.get(4));
+		assertEquals(new RightParenToken(), tokens.get(5));
+		assertEquals(new RightParenToken(), tokens.get(6));
 	}
 	
 	@Test
@@ -148,6 +157,14 @@ public class TokenizerTest {
 		assertEquals(new TimesToken(), tokens.get(1));
 		assertEquals(new IdentifierToken("x"), tokens.get(2));
 		assertEquals(new TimesToken(), tokens.get(3));
+		assertEquals(new IdentifierToken("y"), tokens.get(4));
+		
+		expression = "y / x / y";
+		tokens = tokenizer.parseTokens(expression);
+		assertEquals(new IdentifierToken("y"), tokens.get(0));
+		assertEquals(new DivideToken(), tokens.get(1));
+		assertEquals(new IdentifierToken("x"), tokens.get(2));
+		assertEquals(new DivideToken(), tokens.get(3));
 		assertEquals(new IdentifierToken("y"), tokens.get(4));
 		
 		expression = "y+(x+y)*x";
