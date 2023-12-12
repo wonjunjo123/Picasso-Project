@@ -361,8 +361,94 @@ public class EvaluatorTests {
 		
 	}
   	
+  	@Test
+	public void testMinusEvaluation() {
+		Subtraction myTree = new Subtraction(new X(), new Y());
 
+		// some straightforward tests
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1, 0));
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(0, -1));
+		assertEquals(new RGBColor(-0.5, -0.5, -0.5), myTree.evaluate(-0.6, -0.1));
+		assertEquals(new RGBColor(0.5, 0.5, 0.5), myTree.evaluate(0.6, 0.1));
+		assertEquals(new RGBColor(-0.7, -0.7, -0.7), myTree.evaluate(-0.6, 0.1));
+		assertEquals(new RGBColor(0.7, 0.7, 0.7), myTree.evaluate(0.6, -0.1));
+		
+		// test the ints; 
+		for (int i = -1; i <= 1; i++) {
+			assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(i, i));
+			assertEquals(new RGBColor(2*i, 2*i, 2*i), myTree.evaluate(i, -i));
+
+		}
+
+		double[] tests = { -1.7, -1, -.00001, 0, .000001, 1, 1.5 };
+		
+		for (double testVal : tests) {
+			double minusOfTestVal = testVal;
+			
+			assertEquals(new RGBColor(minusOfTestVal, minusOfTestVal, minusOfTestVal), myTree.evaluate(testVal, 0));
+			assertEquals(new RGBColor(2*minusOfTestVal, 2*minusOfTestVal, 2*minusOfTestVal),myTree.evaluate(testVal, -testVal));
+		}
+  	
+  	}
+  	
+  	@Test
+	public void testModEvaluation() {
+		Modulo myTree = new Modulo(new X(), new Y());
+
+		double[] tests = { -1.7, -1, -.00001, -0.5, 0, .000001, 0.5, 1, 1.5 };
+		
+		for (double testVal : tests) {
+			double modOfTestVal1 = testVal % 0.1;
+			double modOfTestVal2 = testVal % -0.8;
+			
+			assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(testVal, testVal));
+			assertEquals(new RGBColor(modOfTestVal1, modOfTestVal1, modOfTestVal1),myTree.evaluate(testVal, 0.1));
+			assertEquals(new RGBColor(modOfTestVal2, modOfTestVal2, modOfTestVal2),myTree.evaluate(testVal, -0.8));
+			assertEquals(new RGBColor(testVal, testVal, testVal),myTree.evaluate(testVal, 0));
+		
+			
+		}
+		
+  	}
+  	
+  	@Test
+	public void testExponentiateEvaluation() {
+		Exponentiation myTree = new Exponentiation(new X(), new Y());
+		
+		double[] tests = {-1, -0.5, -.27, .31, 0.5, 1};
+
+		for (double testVal : tests) {
+			double expOfTestVal1 = Math.pow(testVal, -1);
+			double expOfTestVal2 = Math.pow(testVal, -0.5);
+			double expOfTestVal3 = Math.pow(testVal, 0);
+			double expOfTestVal4 = Math.pow(testVal, 0.5);
+			double expOfTestVal5 = Math.pow(testVal, 1);
+			
+			assertEquals(new RGBColor(expOfTestVal1, expOfTestVal1, expOfTestVal1), myTree.evaluate(testVal, -1));
+			assertEquals(new RGBColor(expOfTestVal2, expOfTestVal2, expOfTestVal2).getRed(), myTree.evaluate(testVal, -0.5).getRed(), 0.01);
+			assertEquals(new RGBColor(expOfTestVal3, expOfTestVal3, expOfTestVal3), myTree.evaluate(testVal, 0));
+			assertEquals(new RGBColor(expOfTestVal4, expOfTestVal4, expOfTestVal4).getBlue(), myTree.evaluate(testVal, 0.5).getBlue(), 0.01);
+			assertEquals(new RGBColor(expOfTestVal5, expOfTestVal5, expOfTestVal5), myTree.evaluate(testVal, 1));
+		
+			
+			
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, -1));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, -0.4));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0.5));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 1));
+		}
+  	
+
+	}
+  	
 }
+		
+	
+  	
+  	
+  	
+  	
   
   
   

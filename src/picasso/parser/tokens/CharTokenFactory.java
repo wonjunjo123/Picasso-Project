@@ -39,6 +39,9 @@ public class CharTokenFactory {
 		tokenList[CharConstants.QUOTE] = new QuoteToken();
 		tokenList[CharConstants.STAR] = new TimesToken();
 		tokenList[CharConstants.SLASH] = new DivideToken();
+		tokenList[CharConstants.MINUS] = new MinusToken();
+		tokenList[CharConstants.MOD] = new ModToken();
+		tokenList[CharConstants.CARET] = new ExponentiateToken();
 
 		// TODO: What other tokens should be in here?
 		// TODO: Need to create the associated Token classes too.
