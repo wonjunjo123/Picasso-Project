@@ -34,10 +34,27 @@ public class Division extends ExpressionTreeNode {
 	public RGBColor evaluate(double x, double y) {
 		RGBColor result1 = left.evaluate(x, y);
 		RGBColor result2 = right.evaluate(x, y);
-		
-		double red = result1.getRed() / result2.getRed();
-		double green = result1.getGreen() / result2.getGreen();
-		double blue = result1.getBlue() / result2.getBlue();
+		double red;
+		double green;
+		double blue;
+		if (result2.getRed() == 0) {
+			red = 0;
+		}
+		else {
+			red = result1.getRed() / result2.getRed();
+		}
+		if (result2.getGreen() == 0) {
+			green = 0;
+		}
+		else {
+			green = result1.getGreen() / result2.getGreen();
+		}
+		if (result2.getBlue() == 0) {
+			blue = 0;
+		}
+		else {
+			blue = result1.getBlue() / result2.getBlue();
+		}
 		return new RGBColor(red, green, blue);
 	}
 	
