@@ -34,24 +34,25 @@ public class Modulo extends ExpressionTreeNode {
 	public RGBColor evaluate(double x, double y) {
 		RGBColor result1 = left.evaluate(x, y);
 		RGBColor result2 = right.evaluate(x, y);
-		
-		double red = result1.getRed() % result2.getRed();
-		double green = result1.getGreen() % result2.getGreen();
-		double blue = result1.getBlue() % result2.getBlue();
-		
-		if (result2.getRed() == 0) { // Handles divide by zero concerns by returning unchanged result1 value
-			red = result1.getRed();
-		}
-		
-		
-		if (result2.getGreen() == 0) {
-			green = result1.getGreen();
-		}
 	
+		// Handles divide by zero concerns by returning unchanged numerator value if divisor is zero
+		double red = result1.getRed();
+		double green = result1.getGreen();
+		double blue = result1.getBlue();
 		
-		if (result2.getBlue() == 0) {
-			blue = result1.getBlue();
+				
+		if (result2.getRed() != 0) {
+			red = red % result2.getRed();
 		}
+		
+		if (result2.getGreen() != 0) {
+			green = green % result2.getGreen();
+		}
+		
+		if (result2.getBlue() != 0) {
+			blue = blue % result2.getBlue();
+		}
+		
 		
 		return new RGBColor(red, green, blue);
 	}
