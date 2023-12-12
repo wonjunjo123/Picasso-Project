@@ -61,7 +61,19 @@ class SemanticAnalyzerTest {
 
 		assertEquals(new Multiplication(new X(), new Y()), actual);
 	}
+	
+	@Test
+	void testParseDivision() {
 
+		Stack<Token> tokens = new Stack<>();
+		tokens.push(new IdentifierToken("x"));
+		tokens.push(new IdentifierToken("y"));
+		tokens.push(new DivideToken());
+
+		ExpressionTreeNode actual = semAnalyzer.generateExpressionTree(tokens);
+
+		assertEquals(new Division(new X(), new Y()), actual);
+	}
 	
 	@Test
 	void testParseCos() {
@@ -83,7 +95,28 @@ class SemanticAnalyzerTest {
 		ExpressionTreeNode actual = semAnalyzer.generateExpressionTree(tokens);
 
 		assertEquals(new Sine(new X()), actual);
+	}
+	
+	@Test
+	void testParseTan() {
+		Stack<Token> tokens = new Stack<>();
+		tokens.push(new IdentifierToken("x"));
+		tokens.push(new TanToken());
 
+		ExpressionTreeNode actual = semAnalyzer.generateExpressionTree(tokens);
+
+		assertEquals(new Tan(new X()), actual);
+	}
+	
+	@Test
+	void testParseAtan() {
+		Stack<Token> tokens = new Stack<>();
+		tokens.push(new IdentifierToken("x"));
+		tokens.push(new AtanToken());
+
+		ExpressionTreeNode actual = semAnalyzer.generateExpressionTree(tokens);
+
+		assertEquals(new Atan(new X()), actual);
 	}
 	
 	@Test

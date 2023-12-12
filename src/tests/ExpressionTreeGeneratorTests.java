@@ -76,6 +76,21 @@ public class ExpressionTreeGeneratorTests {
 		assertEquals(new Multiplication(new Multiplication(new X(), new Y()), new RGBColor(-.41, 0, 1)), e);
 	}
 	
+	@Test
+	public void divisionExpressionTests() {
+		ExpressionTreeNode e = parser.makeExpression("x / y");
+		assertEquals(new Division(new X(), new Y()), e);
+		
+		// no spaces!
+		e = parser.makeExpression("x/y");
+		assertEquals(new Division(new X(), new Y()), e);
+
+		e = parser.makeExpression("[0.99,-0.5,-1] / y");
+		assertEquals(new Division(new RGBColor(0.99, -0.5, -1), new Y()), e);
+
+		e = parser.makeExpression("x / y / [ -.41, 0, 1]");
+		assertEquals(new Division(new Division(new X(), new Y()), new RGBColor(-.41, 0, 1)), e);
+	}	
 
 	@Test
 	public void parenthesesExpressionTests() {
@@ -126,6 +141,24 @@ public class ExpressionTreeGeneratorTests {
 		
 		e = parser.makeExpression("sin( x + y )");
 		assertEquals(new Sine(new Addition(new X(), new Y())), e); 
+	}
+	
+	@Test
+	public void tanFunctionTests() {
+		ExpressionTreeNode e = parser.makeExpression("tan( x )");
+		assertEquals(new Tan(new X()), e);
+		
+		e = parser.makeExpression("tan( x + y )");
+		assertEquals(new Tan(new Addition(new X(), new Y())), e); 
+	}
+	
+	@Test
+	public void atanFunctionTests() {
+		ExpressionTreeNode e = parser.makeExpression("atan( x )");
+		assertEquals(new Atan(new X()), e);
+		
+		e = parser.makeExpression("atan( x + y )");
+		assertEquals(new Atan(new Addition(new X(), new Y())), e); 
 	}
 	
 	@Test
