@@ -195,7 +195,21 @@ public class ExpressionTreeGeneratorTests {
 		assertEquals(new Subtraction(new Subtraction(new X(), new Y()), new RGBColor(-.51, 0, 1)), e);
 	}
 	
-	
+	@Test
+	public void modExpressionTests() {
+		ExpressionTreeNode e = parser.makeExpression("x % y");
+		assertEquals(new Modulo(new X(), new Y()), e);
+		
+		// no spaces!
+		e = parser.makeExpression("x%y");
+		assertEquals(new Modulo(new X(), new Y()), e);
+
+		e = parser.makeExpression("[1,.3,-1] % y");
+		assertEquals(new Modulo(new RGBColor(1, .3, -1), new Y()), e);
+
+		e = parser.makeExpression("x % y % [ -.51, 0, 1]");
+		assertEquals(new Modulo(new Modulo(new X(), new Y()), new RGBColor(-.51, 0, 1)), e);
+	}
 	
 
 }

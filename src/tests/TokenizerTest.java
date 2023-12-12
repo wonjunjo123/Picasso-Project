@@ -176,6 +176,21 @@ public class TokenizerTest {
 		assertEquals(new MinusToken(), tokens.get(3));
 		assertEquals(new IdentifierToken("y"), tokens.get(4));
 		
+		expression = "x%y";
+		tokens = tokenizer.parseTokens(expression);
+		assertEquals(new IdentifierToken("x"), tokens.get(0));
+		assertEquals(new ModToken(), tokens.get(1));
+		assertEquals(new IdentifierToken("y"), tokens.get(2));
+		
+		expression = "y % x % y";
+		tokens = tokenizer.parseTokens(expression);
+		assertEquals(new IdentifierToken("y"), tokens.get(0));
+		assertEquals(new ModToken(), tokens.get(1));
+		assertEquals(new IdentifierToken("x"), tokens.get(2));
+		assertEquals(new ModToken(), tokens.get(3));
+		assertEquals(new IdentifierToken("y"), tokens.get(4));
+		
+		
 	}
 	
 	@Test

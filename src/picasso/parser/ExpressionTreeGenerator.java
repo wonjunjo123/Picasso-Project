@@ -199,7 +199,7 @@ public class ExpressionTreeGenerator {
 		if (token instanceof PlusToken || token instanceof MinusToken)
 			return ADD_OR_SUBTRACT;
 		
-		else if(token instanceof TimesToken || token instanceof DivideToken)
+		else if(token instanceof TimesToken || token instanceof DivideToken || token instanceof ModToken)
 			return MULTIPLY_OR_DIVIDE;
 		
 		else if(token instanceof LeftParenToken || token instanceof RightParenToken)
