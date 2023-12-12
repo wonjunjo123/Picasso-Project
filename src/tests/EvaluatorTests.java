@@ -263,7 +263,6 @@ public class EvaluatorTests {
 		RGBColor sinBlack = myTree.evaluate(-1.5574, -1.5574);
 		RGBColor sinGray = myTree.evaluate(0, 0);
 		RGBColor sinWhite = myTree.evaluate(1.5574, 1.5574);
-		System.out.println(Math.atan(1.5574));
 		
 		RGBColor[] sinCols = {sinBlack, sinGray, sinWhite};
 		

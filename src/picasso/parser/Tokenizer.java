@@ -77,7 +77,7 @@ public class Tokenizer {
 			result = nextToken();
 		}
 
-		System.out.println("Tokens: " + tokens);
+		//System.out.println("Tokens: " + tokens);
 		return tokens;
 	}
 

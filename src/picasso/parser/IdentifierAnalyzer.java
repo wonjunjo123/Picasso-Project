@@ -44,6 +44,7 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 		Token token = tokens.pop();
 		IdentifierToken t = (IdentifierToken) token;
 		String id = t.getName();
+		System.out.println(id);
 		ExpressionTreeNode mapped = idToExpression.get(id);
 		
 		if (mapped != null) {
@@ -53,16 +54,26 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 		if (mapped == null) {
 			String word = token.toString();
 			word = word.substring(word.indexOf(": ")+2, word.length());
-			System.out.println(word);
-			String[] letters = new String[word.length()];
+			//System.out.println(word);
+			char[] letters = new char[word.length()];
 			int i = 0;
 			while (i < word.length()) {
-				letters[i] = word.substring(i, i+1);
+				char a = word.charAt(i);
+				letters[i] = a;
 				i++;
-				System.out.println(i);
+				//System.out.println(i);
 			}
-			String message = "Unrecognized Identifier Variable: " + id;
-			throw new ParseException(message);
+			/**System.out.println(Character.getNumericValue(letters[0]));
+			System.out.println(Character.getNumericValue(letters[1]));*/
+			for (char c : letters) {
+				if ( ( Character.getNumericValue(c) > 9 &&  Character.getNumericValue(c) < 36)) {
+					id = "x";
+				}
+			}
+			mapped = idToExpression.get(id);
+			return mapped;
+			//String message = "Unrecognized Identifier Variable: " + id;
+			//throw new ParseException(message);
 		}
 
 		// TODO : What should we do if we don't recognize the identifier?
