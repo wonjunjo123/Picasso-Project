@@ -50,6 +50,9 @@ public class Canvas extends JPanel {
 		
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				if (coordFrame != null) {
+					coordFrame.dispose();
+				}
 				int x_coordinate = e.getX();
 				int y_coordinate = e.getY();
 				double Y_CoordScale = imageToDomainScale(y_coordinate, myPixmap.getSize().height);
@@ -57,7 +60,7 @@ public class Canvas extends JPanel {
 				
 				Color color = myPixmap.getColor(x_coordinate,  y_coordinate);
 				showCoordinates(X_CoordScale, Y_CoordScale, color);
-			}
+				}
 		});
 		refresh();
 	}
