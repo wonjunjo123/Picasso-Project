@@ -43,7 +43,6 @@ public class Image extends ExpressionTreeNode {
 			this.mySize = new Dimension(myImage.getWidth(), myImage.getHeight());
 		} catch (IOException e) {
 			throw new ParseException("Not a valid image!");
-			//e.printStackTrace();
 		}
 	}
 	
