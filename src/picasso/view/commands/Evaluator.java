@@ -2,7 +2,7 @@ package picasso.view.commands;
 
 import java.awt.Color;
 import java.awt.Dimension;
-
+import java.util.ArrayList;
 
 import picasso.model.Pixmap;
 import picasso.parser.ExpressionTreeGenerator;
@@ -20,7 +20,7 @@ public class Evaluator implements Command<Pixmap> {
 	public static final double DOMAIN_MIN = -1;
 	public static final double DOMAIN_MAX = 1;
 	public String s;
-	
+
 	/**
 	 * Evaluate an expression for each point in the image.
 	 */
@@ -72,13 +72,27 @@ public class Evaluator implements Command<Pixmap> {
 		// generate expression trees from strings, or you can create expression
 		// objects directly (as in the commented statement below).
 
-		String test = Frame.getExpressionText();
+		String text= Frame.getExpressionText();
+		
 
 		ExpressionTreeGenerator expTreeGen = new ExpressionTreeGenerator();
 		
-		return expTreeGen.makeExpression(test);
-
-		// return new Multiply( new X(), new Y() );
+		return expTreeGen.makeExpression(text);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
