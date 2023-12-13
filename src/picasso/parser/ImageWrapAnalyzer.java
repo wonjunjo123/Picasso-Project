@@ -12,7 +12,7 @@ import picasso.parser.tokens.Token;
  * Handles parsing the ImageWrap function.
  * 
  * @author Robert C. Duvall
- * @author Sara Sprenkle
+ * @author Wonjun Jo
  * 
  */
 public class ImageWrapAnalyzer implements SemanticAnalyzerInterface {
