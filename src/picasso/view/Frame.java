@@ -68,6 +68,7 @@ public class Frame extends JFrame implements KeyListener{
 			
 			}
 		});
+
 				
 		expressionTextField.addKeyListener(new KeyListener() {;
 			public void keyPressed(KeyEvent e) {
@@ -104,12 +105,11 @@ public class Frame extends JFrame implements KeyListener{
 			
 		});
 		
-		
 		commands.add("Open", new Reader());
 		commands.add("Evaluate", new ThreadedCommand<Pixmap>(canvas, new Evaluator()));
 		commands.add("Save", new Writer());
 		commands.add(expressionTextField);
-		
+
 
 		// add our container to Frame and show it
 		getContentPane().add(canvas, BorderLayout.CENTER);
