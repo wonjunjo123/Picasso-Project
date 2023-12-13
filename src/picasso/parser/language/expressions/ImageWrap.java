@@ -49,12 +49,9 @@ public class ImageWrap extends ExpressionTreeNode {
 		double xWrap = wrapAround(xEval);
 		double yWrap = wrapAround(yEval);
 		
-		int xPixel = coorToPixel(xWrap, image.mySize.width);
-		int yPixel = coorToPixel(yWrap, image.mySize.height);
+		RGBColor origColor = image.evaluate(xWrap, yWrap); 
 		
-		Color origColor = image.getColor(xPixel,yPixel);
-		
-		return new RGBColor(origColor);
+		return origColor;
 	}
 	
 	/**
@@ -75,17 +72,7 @@ public class ImageWrap extends ExpressionTreeNode {
 		return result;
 	}
 	
-	/**
-	 * Converts a coordinate [-1, 1] to int pixels from 0 to length
-	 * length can either by image width or image height
-	 * 
-	 * @param val 
-	 * @param length the width or height of the image
-	 * @return an int pixel corresponding proportionally to the coordinates
-	 */
-	private static int coorToPixel(double val, int length) {
-		return (int) (((val+1)/2)*length);
-	}
+	
 	
 	@Override
 	public boolean equals(Object o) {

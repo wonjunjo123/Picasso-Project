@@ -225,7 +225,56 @@ public class EvaluatorTests {
 		}
 	}
   
-  @Test
+  	@Test
+	public void testTanEvaluation() {
+	  Tan myTree = new Tan(new X());
+		
+		//Some basic tests
+		RGBColor black = new RGBColor(-1, -1, -1);
+		RGBColor gray = new RGBColor(0, 0, 0);
+		RGBColor white = new RGBColor(1, 1, 1);
+		
+		RGBColor[] colors = {black, gray, white};
+		
+		RGBColor sinBlack = myTree.evaluate(3*Math.PI/4, 3*Math.PI/4);
+		RGBColor sinGray = myTree.evaluate(0, 0);
+		RGBColor sinWhite = myTree.evaluate(Math.PI/4, Math.PI/4);
+		
+		RGBColor[] sinCols = {sinBlack, sinGray, sinWhite};
+		
+		for (int i = 0; i < 3; i++) {
+			assertEquals(colors[i].getRed(), sinCols[i].getRed(), 0.0001);
+			assertEquals(colors[i].getGreen(), sinCols[i].getGreen(), 0.0001);
+			assertEquals(colors[i].getBlue(), sinCols[i].getBlue(), 0.0001);
+		}
+	}
+  
+  	@Test
+	public void testAtanEvaluation() {
+	  Atan myTree = new Atan(new X());
+		
+		//Some basic tests
+		RGBColor black = new RGBColor(-1, -1, -1);
+		RGBColor gray = new RGBColor(0, 0, 0);
+		RGBColor white = new RGBColor(1, 1, 1);
+		
+		RGBColor[] colors = {black, gray, white};
+		
+		RGBColor sinBlack = myTree.evaluate(-1.5574, -1.5574);
+		RGBColor sinGray = myTree.evaluate(0, 0);
+		RGBColor sinWhite = myTree.evaluate(1.5574, 1.5574);
+		System.out.println(Math.atan(1.5574));
+		
+		RGBColor[] sinCols = {sinBlack, sinGray, sinWhite};
+		
+		for (int i = 0; i < 3; i++) {
+			assertEquals(colors[i].getRed(), sinCols[i].getRed(), 0.0001);
+			assertEquals(colors[i].getGreen(), sinCols[i].getGreen(), 0.0001);
+			assertEquals(colors[i].getBlue(), sinCols[i].getBlue(), 0.0001);
+		}
+	}
+  
+  	@Test
 	public void testTimesEvaluation() {
 		Multiplication myTree = new Multiplication(new X(), new Y());
 
@@ -244,6 +293,25 @@ public class EvaluatorTests {
 		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1, 1));
 
 	}
+  
+  @Test
+  public void testDivideEvaluation() {
+	  Division myTree = new Division(new X(), new Y());
+	  
+	  // some straightforward tests
+	  assertEquals(new RGBColor(0.05, 0.05, 0.05), myTree.evaluate(0.5, 10));
+	  assertEquals(new RGBColor(0.9, 0.9, 0.9), myTree.evaluate(0.81, 0.9));
+	  assertEquals(new RGBColor(-0.6, -0.6, -0.6), myTree.evaluate(-0.18, 0.3));
+	  assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0.9, 0));
+	  
+	  //tests the ints
+	  assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(1, 0));
+	  assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(-1, 0));
+	  assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0));
+	  assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(1, -1));
+	  assertEquals(new RGBColor(-1, -1, -1), myTree.evaluate(-1, 1));
+	  assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1, 1));
+  }
 
   @Test
 	public void testAssignmentEvaluation() {
@@ -293,8 +361,94 @@ public class EvaluatorTests {
 		
 	}
   	
+  	@Test
+	public void testMinusEvaluation() {
+		Subtraction myTree = new Subtraction(new X(), new Y());
 
+		// some straightforward tests
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(1, 0));
+		assertEquals(new RGBColor(1, 1, 1), myTree.evaluate(0, -1));
+		assertEquals(new RGBColor(-0.5, -0.5, -0.5), myTree.evaluate(-0.6, -0.1));
+		assertEquals(new RGBColor(0.5, 0.5, 0.5), myTree.evaluate(0.6, 0.1));
+		assertEquals(new RGBColor(-0.7, -0.7, -0.7), myTree.evaluate(-0.6, 0.1));
+		assertEquals(new RGBColor(0.7, 0.7, 0.7), myTree.evaluate(0.6, -0.1));
+		
+		// test the ints; 
+		for (int i = -1; i <= 1; i++) {
+			assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(i, i));
+			assertEquals(new RGBColor(2*i, 2*i, 2*i), myTree.evaluate(i, -i));
+
+		}
+
+		double[] tests = { -1.7, -1, -.00001, 0, .000001, 1, 1.5 };
+		
+		for (double testVal : tests) {
+			double minusOfTestVal = testVal;
+			
+			assertEquals(new RGBColor(minusOfTestVal, minusOfTestVal, minusOfTestVal), myTree.evaluate(testVal, 0));
+			assertEquals(new RGBColor(2*minusOfTestVal, 2*minusOfTestVal, 2*minusOfTestVal),myTree.evaluate(testVal, -testVal));
+		}
+  	
+  	}
+  	
+  	@Test
+	public void testModEvaluation() {
+		Modulo myTree = new Modulo(new X(), new Y());
+
+		double[] tests = { -1.7, -1, -.00001, -0.5, 0, .000001, 0.5, 1, 1.5 };
+		
+		for (double testVal : tests) {
+			double modOfTestVal1 = testVal % 0.1;
+			double modOfTestVal2 = testVal % -0.8;
+			
+			assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(testVal, testVal));
+			assertEquals(new RGBColor(modOfTestVal1, modOfTestVal1, modOfTestVal1),myTree.evaluate(testVal, 0.1));
+			assertEquals(new RGBColor(modOfTestVal2, modOfTestVal2, modOfTestVal2),myTree.evaluate(testVal, -0.8));
+			assertEquals(new RGBColor(testVal, testVal, testVal),myTree.evaluate(testVal, 0));
+		
+			
+		}
+		
+  	}
+  	
+  	@Test
+	public void testExponentiateEvaluation() {
+		Exponentiation myTree = new Exponentiation(new X(), new Y());
+		
+		double[] tests = {-1, -0.5, -.27, .31, 0.5, 1};
+
+		for (double testVal : tests) {
+			double expOfTestVal1 = Math.pow(testVal, -1);
+			double expOfTestVal2 = Math.pow(testVal, -0.5);
+			double expOfTestVal3 = Math.pow(testVal, 0);
+			double expOfTestVal4 = Math.pow(testVal, 0.5);
+			double expOfTestVal5 = Math.pow(testVal, 1);
+			
+			assertEquals(new RGBColor(expOfTestVal1, expOfTestVal1, expOfTestVal1), myTree.evaluate(testVal, -1));
+			assertEquals(new RGBColor(expOfTestVal2, expOfTestVal2, expOfTestVal2).getRed(), myTree.evaluate(testVal, -0.5).getRed(), 0.01);
+			assertEquals(new RGBColor(expOfTestVal3, expOfTestVal3, expOfTestVal3), myTree.evaluate(testVal, 0));
+			assertEquals(new RGBColor(expOfTestVal4, expOfTestVal4, expOfTestVal4).getBlue(), myTree.evaluate(testVal, 0.5).getBlue(), 0.01);
+			assertEquals(new RGBColor(expOfTestVal5, expOfTestVal5, expOfTestVal5), myTree.evaluate(testVal, 1));
+		
+			
+			
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, -1));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, -0.4));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 0.5));
+		assertEquals(new RGBColor(0, 0, 0), myTree.evaluate(0, 1));
+		}
+  	
+
+	}
+  	
 }
+		
+	
+  	
+  	
+  	
+  	
   
   
   

@@ -20,9 +20,8 @@ public class ImageAnalyzer implements SemanticAnalyzerInterface {
 	@Override
 	public ExpressionTreeNode generateExpressionTree(Stack<Token> tokens) {
 		ImageToken imageToken = (ImageToken) tokens.pop(); // Remove the Image token
-		// the parameters are the next tokens on the stack.
-		// But, they need to be processed
 		
+		// now we need to return a Image expressionTreeNode with the filename as the argument
 		String filename = imageToken.getImageName();
 		return new Image(filename);
 	}

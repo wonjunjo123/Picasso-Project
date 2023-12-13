@@ -1,5 +1,6 @@
 package picasso.parser;
 
+import java.io.IOException;
 import java.util.Stack;
 
 import picasso.parser.language.ExpressionTreeNode;
@@ -26,7 +27,13 @@ public class ImageWrapAnalyzer implements SemanticAnalyzerInterface {
 				tokens);
 		ExpressionTreeNode xETN = SemanticAnalyzer.getInstance().generateExpressionTree(
 				tokens);
+		
 		Image imageETN = (Image) SemanticAnalyzer.getInstance().generateExpressionTree(tokens);
+		
+		if (!(imageETN instanceof Image)) {
+			throw new ParseException("Argument is not an Image ETN");
+		}
+		
 		return new ImageWrap(imageETN, xETN, yETN);
 	}
 
