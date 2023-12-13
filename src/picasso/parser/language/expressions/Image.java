@@ -10,6 +10,7 @@ import javax.imageio.*;
 
 import javax.imageio.ImageIO;
 
+import picasso.parser.ParseException;
 import picasso.parser.language.ExpressionTreeNode;
 import picasso.model.Pixmap;
 
@@ -41,7 +42,8 @@ public class Image extends ExpressionTreeNode {
 			this.myImage = ImageIO.read(new File(directory, filename));
 			this.mySize = new Dimension(myImage.getWidth(), myImage.getHeight());
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new ParseException("Not a valid image!");
+			//e.printStackTrace();
 		}
 	}
 	
