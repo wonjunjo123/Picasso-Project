@@ -29,7 +29,7 @@ public class Reader extends FileCommand<Pixmap> {
 	 */
 
 	/**
-	 * Displays the image file on the given target.
+	 * Displays the image or expression file on the given target. 
 	 */
 	public void execute(Pixmap target) {
 		String fileName = getFileName();
@@ -41,7 +41,6 @@ public class Reader extends FileCommand<Pixmap> {
 					String expression;
 					while ((currLine = br.readLine()) != null) {
 						expression = currLine;
-						System.out.println(expression);
 						Frame.setExpressionText(expression);
 						new Evaluator().execute(target);
 					}
