@@ -186,16 +186,12 @@ public class ExpressionTreeGenerator {
 	}
 
 	/**
+	 * Returns the precedence integer values for the various token types
 	 * 
-	 * @param token
-	 * @return
+	 * @param token a token to be assigned a precedence value
+	 * @return integer value representing precedence
 	 */
 	private int orderOfOperation(Token token) {
-
-		// TODO: Need to finish with other operators.
-
-		// TODO: DISCUSS: Is it better to have a method in the OperatorToken
-		// class that gives the order of operation?
 
 		if (token instanceof PlusToken || token instanceof MinusToken)
 			return ADD_OR_SUBTRACT;
