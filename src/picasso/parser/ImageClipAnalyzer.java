@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Stack;
 
 import picasso.parser.language.ExpressionTreeNode;
-import picasso.parser.language.expressions.ImageWrap;
+import picasso.parser.language.expressions.ImageClip;
 import picasso.parser.language.expressions.Image;
 import picasso.parser.tokens.Token;
 
@@ -15,11 +15,11 @@ import picasso.parser.tokens.Token;
  * @author Wonjun Jo
  * 
  */
-public class ImageWrapAnalyzer implements SemanticAnalyzerInterface {
+public class ImageClipAnalyzer implements SemanticAnalyzerInterface {
 
 	@Override
 	public ExpressionTreeNode generateExpressionTree(Stack<Token> tokens) {
-		tokens.pop(); // Remove the ImageWrap token
+		tokens.pop(); // Remove the ImageClip token
 		// the parameters are the next tokens on the stack.
 		// But, they need to be processed
 		
@@ -34,7 +34,7 @@ public class ImageWrapAnalyzer implements SemanticAnalyzerInterface {
 			throw new ParseException("Argument is not an Image ETN");
 		}
 		
-		return new ImageWrap(imageETN, xETN, yETN);
+		return new ImageClip(imageETN, xETN, yETN);
 	}
 
 }
