@@ -31,6 +31,8 @@ public class Frame extends JFrame implements KeyListener{
 	private static int index = 0;
 	
 	private static JTextField expressionTextField;
+	private Evaluator evaluator = new Evaluator();
+	
 	public Frame(Dimension size) {
 		
 		addKeyListener(this);
@@ -50,8 +52,7 @@ public class Frame extends JFrame implements KeyListener{
 		expressionTextField = new JTextField(40);
 		expressionTextField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				Evaluator evaluator = new Evaluator();
+				//Evaluator evaluator = new Evaluator();
 				evaluator.execute(canvas.getPixmap());
 				canvas.refresh();
 				
