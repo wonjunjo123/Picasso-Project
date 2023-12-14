@@ -60,6 +60,11 @@ public class SemanticAnalyzer implements SemanticAnalyzerInterface {
 		tokenName = TOKENS_PACKAGE_NAME + "IdentifierToken";
 		parserName = PARSER_PACKAGE + "IdentifierAnalyzer";
 		addSemanticAnalyzerMapping(tokenName, parserName);
+		
+		// WordToken --> WordAnalyzer
+		tokenName = TOKENS_PACKAGE_NAME + "WordToken";
+		parserName = PARSER_PACKAGE + "WordAnalyzer";
+		addSemanticAnalyzerMapping(tokenName, parserName);
 
 		// Color mapping
 		tokenName = TOKENS_PACKAGE_NAME + "ColorToken";

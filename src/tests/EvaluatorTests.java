@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import picasso.parser.WordAnalyzer;
 import picasso.parser.language.ExpressionTreeNode;
 import picasso.parser.language.expressions.*;
 
@@ -263,7 +264,6 @@ public class EvaluatorTests {
 		RGBColor sinBlack = myTree.evaluate(-1.5574, -1.5574);
 		RGBColor sinGray = myTree.evaluate(0, 0);
 		RGBColor sinWhite = myTree.evaluate(1.5574, 1.5574);
-		System.out.println(Math.atan(1.5574));
 		
 		RGBColor[] sinCols = {sinBlack, sinGray, sinWhite};
 		
@@ -361,8 +361,18 @@ public class EvaluatorTests {
 		
 	}
   	
-  	@Test
-	public void testMinusEvaluation() {
+  @Test
+  public void testWordEvaluation() {
+  		Word myTree = new Word(new X());
+  		//WordAnalyzer.generateExpressionTree(myTree);
+  		//System.out.println(myTree.getLeft());
+  		//System.out.println(myTree.getRight());
+  		
+  		assertEquals("x", myTree.getWord().toString());
+  }
+  
+  @Test
+  public void testMinusEvaluation() {
 		Subtraction myTree = new Subtraction(new X(), new Y());
 
 		// some straightforward tests
