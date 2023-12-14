@@ -51,26 +51,6 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 		}
 		//System.out.println("test");
 		if (mapped == null) {
-			/**String word = token.toString();
-			word = word.substring(word.indexOf(": ")+2, word.length());
-			//System.out.println(word);
-			char[] letters = new char[word.length()];
-			int i = 0;
-			while (i < word.length()) {
-				char a = word.charAt(i);
-				letters[i] = a;
-				i++;
-				//System.out.println(i);
-			}
-			System.out.println(Character.getNumericValue(letters[0]));
-			System.out.println(Character.getNumericValue(letters[1]));
-			for (char c : letters) {
-				if ( ( Character.getNumericValue(c) > 9 &&  Character.getNumericValue(c) < 36)) {
-					id = "x";
-				}
-			}
-			mapped = idToExpression.get(id);
-			return mapped;*/
 			String message = "Unrecognized Identifier Variable: " + id;
 			throw new ParseException(message);
 		}
