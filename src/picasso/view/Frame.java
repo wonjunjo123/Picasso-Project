@@ -108,6 +108,7 @@ public class Frame extends JFrame implements KeyListener{
 		
 		commands.add("Open", new Reader());
 		commands.add("Evaluate", new ThreadedCommand<Pixmap>(canvas, new Evaluator()));
+		commands.add("Animate", new ThreadedCommand<Pixmap>(canvas, new Animator(evaluator)));
 		commands.add("Save", new Writer());
 		commands.add(expressionTextField);
 
