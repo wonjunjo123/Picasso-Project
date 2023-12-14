@@ -9,7 +9,6 @@ import picasso.parser.language.expressions.X;
 import picasso.parser.language.expressions.Y;
 import picasso.parser.tokens.IdentifierToken;
 import picasso.parser.tokens.Token;
-import picasso.view.ErrorHandling;
 
 import javax.swing.*;
 

@@ -4,7 +4,7 @@ package picasso.parser.tokens;
  * Represents an word expression
  * 
  * @author Owen Astrachan
- * @author Sara Sprenkle
+ * @author Nick Lagges
  * 
  */
 public class WordToken extends Token {
@@ -46,7 +46,7 @@ public class WordToken extends Token {
 
 	@Override
 	public boolean isFunction() {
-		return false;
+		return true;
 	}
 
 }
