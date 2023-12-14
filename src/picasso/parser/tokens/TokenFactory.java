@@ -9,10 +9,10 @@ import java.util.HashMap;
 
 import picasso.parser.ParseException;
 import picasso.parser.language.BuiltinFunctionsReader;
-import picasso.parser.tokens.chars.CommaToken;
-import picasso.parser.tokens.chars.LeftBracketToken;
-import picasso.parser.tokens.chars.RightBracketToken;
-import picasso.parser.tokens.chars.QuoteToken;
+import picasso.parser.tokens.chars.*;
+//import picasso.parser.tokens.chars.LeftBracketToken;
+//import picasso.parser.tokens.chars.RightBracketToken;
+//import picasso.parser.tokens.chars.QuoteToken;
 
 /**
  * Looks at a generic token and creates the appropriate token type
@@ -39,11 +39,15 @@ public class TokenFactory {
 
 				// If there is no token with a function name, the token must be
 				// a string, unless it is x or y
-				//System.out.println(tokenizer.sval);
-				if ( (t == null) && ( (tokenizer.sval.equals("x") || (tokenizer.sval.equals("y") ) ) ) ) {
+				//System.out.println(tokenizer.sval + "1");
+				//System.out.println(result);
+				//if ( (t == null) && ( (tokenizer.sval.equals("x") || (tokenizer.sval.equals("y") ) ) || (result == 61) ) ) {
+				if ( (t == null) && (tokenizer.sval.length() < 3) ) {
+					//System.out.println("identifier: " + tokenizer.sval);
 					return new IdentifierToken(tokenizer.sval);
 				}
 				else if ( ( t == null) && ( !(tokenizer.sval.equals("x")) && !(tokenizer.sval.equals("y") ) ) ){
+					//System.out.println(tokenizer.sval + "3");
 					return new WordToken(tokenizer.sval);
 				}
 				//System.out.println("end");
