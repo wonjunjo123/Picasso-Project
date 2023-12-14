@@ -6,8 +6,6 @@ import java.util.Stack;
 
 import picasso.parser.language.ExpressionTreeNode;
 import picasso.parser.language.expressions.*;
-//import picasso.parser.language.expressions.X;
-//import picasso.parser.language.expressions.Y;
 import picasso.parser.tokens.*;
 import picasso.parser.tokens.functions.*;
 import picasso.parser.tokens.operations.*;
@@ -33,10 +31,11 @@ public class WordAnalyzer implements SemanticAnalyzerInterface {
 	}
 	
 	/**
-	 * creates an expression tree node from a stack of tokens. Will prompt the user
-	 * to enter a different input if there are any parsing errors
-	 * 		will throw a ParseException if unrecognized identifier analyzer
-	 * 
+	 * MUST BE ONE CONTINUOUS WORD
+	 * (no symbols, only letters (any case)
+	 * creates an expression tree node from a word tokens.
+	 * generates random expressions based on word length
+	 * generates random color 
 	 * @param tokens
 	 * @return
 	 * @see picasso.parser.SemanticAnalyzerInterface#generateExpressionTree(java.util.Stack)
@@ -46,23 +45,22 @@ public class WordAnalyzer implements SemanticAnalyzerInterface {
 		Token token = tokens.pop();
 		WordToken t = (WordToken) token;
 		String id = t.getName();
-		//System.out.println(id);
 		ExpressionTreeNode mapped = wordToExpression.get(id);
 		System.out.println(id);
 		if (mapped != null) {
 			return mapped;
 		}
-		//System.out.println("test");
+		//the different tokens and variables
 		String[] vars = {"x", "y"};
 		FunctionToken[] exprTokens = {new AbsToken(), new AtanToken(), new CeilToken(), 
 									 new ClampToken(), new CosToken(), new FloorToken(), 
 									 new SinToken(), new TanToken()};
+		Random random = new Random();
+		int i = 0;
+		int randnum;
 		if (mapped == null) {
-			Random random = new Random();
-			int i = 0;
-			int randnum;
 			while (i < id.length()) {
-				tokens.push(new IdentifierToken(vars[i%2]));
+				tokens.push(new IdentifierToken(vars[random.nextInt(2)]));
 				if (i >0) {
 					randnum = random.nextInt(exprTokens.length);
 					tokens.push(new PlusToken());
@@ -70,39 +68,13 @@ public class WordAnalyzer implements SemanticAnalyzerInterface {
 				}
 				i++;
 			}
+			tokens.push(new ColorToken((random.nextInt(21)-10) / 10.0, (random.nextInt(21)-10) / 10.0, (random.nextInt(21)-10) / 10.0));
+			tokens.push(new PlusToken());
 			System.out.println(tokens);
 			ExpressionTreeNode paramETN = SemanticAnalyzer.getInstance().generateExpressionTree(tokens);
+			//if word length is only 1, it will return a cos expression every time
 			Cos cosETN = new Cos(paramETN);
 			return cosETN;
-			/**if (id.length() == 3) {
-				tokens.push(new IdentifierToken("x"));
-				ExpressionTreeNode paramETN = SemanticAnalyzer.getInstance().generateExpressionTree(tokens);
-				Cos cosETN = new Cos( new Floor(paramETN));
-				return cosETN;
-			}*/
-			//old code
-			/**String word = token.toString();
-			word = word.substring(word.indexOf(": ")+2, word.length());
-			//System.out.println(word);
-			char[] letters = new char[word.length()];
-			int i = 0;
-			while (i < word.length()) {
-				char a = word.charAt(i);
-				letters[i] = a;
-				i++;
-				//System.out.println(i);
-			}
-			System.out.println(Character.getNumericValue(letters[0]));
-			System.out.println(Character.getNumericValue(letters[1]));
-			for (char c : letters) {
-				if ( ( Character.getNumericValue(c) > 9 &&  Character.getNumericValue(c) < 36)) {
-					id = "x";
-				}
-			}
-			mapped = idToExpression.get(id);
-			return mapped;*/
-			//String message = "Unrecognized Identifier Variable: " + id;
-			//throw new ParseException(message);
 		}
 
 		// TODO : What should we do if we don't recognize the identifier?
