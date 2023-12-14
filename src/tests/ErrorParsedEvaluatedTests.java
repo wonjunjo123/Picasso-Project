@@ -30,13 +30,14 @@ public class ErrorParsedEvaluatedTests {
 			parser.makeExpression("- 7");
 		});
 	}
-
-	@Test
+	
+	//no longer needed because there is a Word analyzer
+	/**@Test
 	public void errorUnrecognizedInputTest() {
 		assertThrows(ParseException.class, () -> {
 			parser.makeExpression("a");
 		});
-	}
+	}*/
 
 	@Test
 	public void errorTooFewArgsTest() {

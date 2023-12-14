@@ -29,6 +29,7 @@ public class WordAnalyzer implements SemanticAnalyzerInterface {
 		wordToExpression.put("x", new X());
 		wordToExpression.put("y", new Y());
 	}
+	private Stack<Token> wordTokens;
 	
 	/**
 	 * MUST BE ONE CONTINUOUS WORD
@@ -46,7 +47,6 @@ public class WordAnalyzer implements SemanticAnalyzerInterface {
 		WordToken t = (WordToken) token;
 		String id = t.getName();
 		ExpressionTreeNode mapped = wordToExpression.get(id);
-		System.out.println(id);
 		if (mapped != null) {
 			return mapped;
 		}
@@ -70,7 +70,7 @@ public class WordAnalyzer implements SemanticAnalyzerInterface {
 			}
 			tokens.push(new ColorToken((random.nextInt(21)-10) / 10.0, (random.nextInt(21)-10) / 10.0, (random.nextInt(21)-10) / 10.0));
 			tokens.push(new PlusToken());
-			System.out.println(tokens);
+			wordTokens = tokens;
 			ExpressionTreeNode paramETN = SemanticAnalyzer.getInstance().generateExpressionTree(tokens);
 			//if word length is only 1, it will return a cos expression every time
 			Cos cosETN = new Cos(paramETN);
@@ -80,6 +80,10 @@ public class WordAnalyzer implements SemanticAnalyzerInterface {
 		// TODO : What should we do if we don't recognize the identifier?
 		// Is that an error? Or, could there a valid reason?
 		return null;
+	}
+	
+	public Stack<Token> getTokens() {
+		return wordTokens;
 	}
 	
 	public static void storeAssignmentResult(String variable, ExpressionTreeNode result) {

@@ -6,70 +6,40 @@ import picasso.parser.language.ExpressionTreeNode;
  * Represents a word expression in the Picasso language.
  * 
  * @author Robert C. Duvall
- * @author Wonjun Jo
+ * @author Nick Lagges
  * 
  */
 public class Word extends ExpressionTreeNode {
 	
-	ExpressionTreeNode left;
-	ExpressionTreeNode right;
+	ExpressionTreeNode word;
 
 	/**
-	 * Create a plus expression that takes as a parameter the given expression
+	 * Create a word expression that takes as a parameter the given expression
 	 * 
 	 * @param left the first one to add
 	 * @param right the second one to add
 	 */
-	public Word(ExpressionTreeNode left, ExpressionTreeNode right) {
-		this.left = left;
-		this.right = right;
+	public Word(ExpressionTreeNode word) {
+		this.word = word;
 	}
 
 	/**
-	 * Evaluates this expression at the given x,y point by evaluating the addition of
-	 * the operator's two arguments.
+	 * Evaluates this expression at the given x,y
 	 * 
 	 * @return the color from evaluating the addition of the two arguments
 	 */
 	@Override
 	public RGBColor evaluate(double x, double y) {
-		RGBColor result1 = left.evaluate(x, y);
-		RGBColor result2 = right.evaluate(x, y);
-		
-		double red = result1.getRed() + result2.getRed();
-		double green = result1.getGreen() + result2.getGreen();
-		double blue = result1.getBlue() + result2.getBlue();
+		RGBColor result = word.evaluate(x, y);		
+		double red = result.getRed();
+		double green = result.getGreen();
+		double blue = result.getBlue();
 
 		return new RGBColor(red, green, blue);
 	}
 	
-	@Override
-	public boolean equals(Object o) {
-		if (o == this) {
-			return true;
-		}
-
-		if (!(o instanceof Word)) {
-			return false;
-		}
-
-		// Make sure the objects are the same type
-
-		if (o.getClass() != this.getClass()) {
-			return false;
-		}
-
-		Word ad = (Word) o;
-
-		// check if their parameters are equal
-		if (this.left.equals(ad.left) && this.right.equals(ad.right)) {
-			return true;
-		} else {
-			return false;
-		}
-		
-		//return true;
-	}
-	
+	public ExpressionTreeNode getWord() {
+		return this.word;
+	}	
 
 }

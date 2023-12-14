@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import picasso.parser.WordAnalyzer;
 import picasso.parser.language.ExpressionTreeNode;
 import picasso.parser.language.expressions.*;
 
@@ -359,6 +360,16 @@ public class EvaluatorTests {
   		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(1,1));
 		
 	}
+  	
+  	@Test
+  	public void testWordEvaluation() {
+  		Word myTree = new Word(new X());
+  		//WordAnalyzer.generateExpressionTree(myTree);
+  		//System.out.println(myTree.getLeft());
+  		//System.out.println(myTree.getRight());
+  		
+  		assertEquals("x", myTree.getWord().toString());
+  	}
   	
 
 }
