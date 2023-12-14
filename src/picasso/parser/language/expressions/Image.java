@@ -70,10 +70,13 @@ public class Image extends ExpressionTreeNode {
 	 *         default color
 	 */
 	public Color getColor(int x, int y) {
-		if (isInBounds(x, y))
+		if (isInBounds(x, y)) {
 			return new Color(myImage.getRGB(x, y));
-		else
-			return Color.BLACK;
+		} else {
+			
+			return Color.BLUE;
+		}
+			
 	}
 	
 	/**
@@ -88,6 +91,7 @@ public class Image extends ExpressionTreeNode {
 		
 		int xPixel = coorToPixel(x, this.mySize.width);
 		int yPixel = coorToPixel(y, this.mySize.height);
+		
 		Color origColor = this.getColor(xPixel,yPixel);
 		return new RGBColor(origColor);
 	}
@@ -133,7 +137,16 @@ public class Image extends ExpressionTreeNode {
 		// Dividing that range by 2 will return the proportional length of val from 0 to 2 as a percentage.
 		// Multiplying that proportion by the pixel length (either width or height)
 		// will return the pixel corresponding to the val
-		return (int) (((val+1)/2)*length);
+		int result = (int) (((val+1)/2)*length);
+		
+		// given the java syntax of .getRGB(), we cannot have output equal 
+		// to the length or height of the image. 
+		// Thus if we val = 1, after we convert to pixels, which equals length or height
+		// we just subtract 1 pixel. Doesn't make a meaningful difference
+		if (result == length) {
+			result = result - 1;
+		}
+		return result;
 	}
 	
 	
