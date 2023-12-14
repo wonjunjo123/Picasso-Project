@@ -14,6 +14,7 @@ public class ParseException extends RuntimeException {
 
 	public ParseException(String message) {
 		super("ParseException: " + message);
+		//These should be in gui
 		Frame.removeLastExpression(); // Removes incorrect expression from history 
 		ErrorHandling parseEx = new ErrorHandling(message);
 		parseEx.showError();
