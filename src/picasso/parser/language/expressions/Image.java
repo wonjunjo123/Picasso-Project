@@ -149,6 +149,10 @@ public class Image extends ExpressionTreeNode {
 		return result;
 	}
 	
+	public Dimension getSize() {
+		return mySize;
+	}
+	
 	
 
 }
