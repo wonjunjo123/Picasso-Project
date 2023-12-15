@@ -196,13 +196,23 @@ public class ExpressionTreeGeneratorTests {
 		ExpressionTreeNode e = parser.makeExpression("a = x + y");
 		assertEquals(new Assignment(new Variable("a"), new Addition(new X(), new Y())), e);
 	}
-
+	
+	@Test
 	public void imageWrapFunctionTests() {
 		ExpressionTreeNode e = parser.makeExpression("imageWrap(\"vortex.jpg\",x,y)");
 		assertEquals(new ImageWrap(new Image("vortex.jpg"), new X(), new Y()), e);
 		
 		e = parser.makeExpression("imageWrap(\"vortex.jpg\",x+x,y+y)");
 		assertEquals(new ImageWrap(new Image("vortex.jpg"), new Addition(new X(), new X()), new Addition(new Y(), new Y())), e);
+	}
+	
+	@Test
+	public void imageClipFunctionTests() {
+		ExpressionTreeNode e = parser.makeExpression("imageClip(\"vortex.jpg\",x,y)");
+		assertEquals(new ImageClip(new Image("vortex.jpg"), new X(), new Y()), e);
+		
+		e = parser.makeExpression("imageClip(\"vortex.jpg\",x+x,y+y)");
+		assertEquals(new ImageClip(new Image("vortex.jpg"), new Addition(new X(), new X()), new Addition(new Y(), new Y())), e);
 	}
 	
 	@Test

@@ -39,6 +39,9 @@ This feature ensures that no expression with input errors will be retained in hi
 ### Expression Generation Based on a String
 This extension allows the user to input any word into the text field and it will generate an image based on that word. The word must be at least 3 characters long, as variables are 2 or less characters. The word will randomly generate an image and color for the image. The functions implemented are randomly generated, and the number of functions used is based on the word's length. For example, if the text field input is "abcd" (the quotations are not part of the input), then the image will be generated from 4 randomized functions. Words can be assigned to variables, as well.
 
+### Animation
+This extension allows the user to animate the image going through a change of color by clicking the "animate" button. It is important that the user does not click other buttons or change the expression in the textbox while the image is animating. After the image animation is complete, "Done animating" will display.
+
 ## Code Base History
 
 This code base originated as a project in a course at Duke University.  The professors realized that the code could be designed better and refactored.  This code base has some code leftover from the original version.
