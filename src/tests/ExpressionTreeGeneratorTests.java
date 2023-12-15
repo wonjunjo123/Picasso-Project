@@ -269,12 +269,11 @@ public class ExpressionTreeGeneratorTests {
 		e = parser.makeExpression("x ^ y ^ [ -.51, 0, 1]");
 		assertEquals(new Exponentiation(new Exponentiation(new X(), new Y()), new RGBColor(-.51, 0, 1)), e);
 	}
-	
+  
 	@Test
 	public void notExpressionTests() {
 		ExpressionTreeNode e = parser.makeExpression("!x");
 		assertEquals(new Not(new X()), e);
 	}
-	
 
 }

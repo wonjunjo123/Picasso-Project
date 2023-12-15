@@ -221,7 +221,25 @@ public class TokenizerTest {
 		assertEquals(new ExponentiateToken(), tokens.get(3));
 		assertEquals(new IdentifierToken("y"), tokens.get(4));
 		
+		expression = "y + random() + y";
+		tokens = tokenizer.parseTokens(expression);
+		assertEquals(new IdentifierToken("y"), tokens.get(0));
+		assertEquals(new PlusToken(), tokens.get(1));
+		assertEquals(new RandomToken(), tokens.get(2));
+		assertEquals(new LeftParenToken(), tokens.get(3));
+		assertEquals(new RightParenToken(), tokens.get(4));
+		assertEquals(new PlusToken(), tokens.get(5));
+		assertEquals(new IdentifierToken("y"), tokens.get(6));
 		
+		expression = "y / x / random()";
+		tokens = tokenizer.parseTokens(expression);
+		assertEquals(new IdentifierToken("y"), tokens.get(0));
+		assertEquals(new DivideToken(), tokens.get(1));
+		assertEquals(new IdentifierToken("x"), tokens.get(2));
+		assertEquals(new DivideToken(), tokens.get(3));
+		assertEquals(new RandomToken(), tokens.get(4));
+		assertEquals(new LeftParenToken(), tokens.get(5));
+		assertEquals(new RightParenToken(), tokens.get(6));
 	}
 	
 	@Test

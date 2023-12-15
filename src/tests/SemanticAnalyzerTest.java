@@ -266,16 +266,15 @@ class SemanticAnalyzerTest {
 		ExpressionTreeNode actual = semAnalyzer.generateExpressionTree(tokens);
 
 		assertEquals(new Exponentiation(new X(), new Y()), actual);
-	}
-	
-	void testParseNot() {
+  }
+  
+  @Test
+  void testParseNot() {
 		Stack<Token> tokens = new Stack<>();
 		tokens.push(new IdentifierToken("x"));
 		tokens.push(new NotToken());
 		ExpressionTreeNode actual = semAnalyzer.generateExpressionTree(tokens);
 		assertEquals(new Not(new X()), actual);
 	}
-	
-
 
 }
