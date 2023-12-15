@@ -48,10 +48,7 @@ public class ExpressionTreeGenerator {
 		
 		// Is this the best place to put this check?
 		if (!postfix.isEmpty()) {
-			String message = "Extra operands without operators or functions";
-			ErrorHandling parseEx = new ErrorHandling(message);
-			parseEx.showError();
-			throw new ParseException(message);
+			throw new ParseException("Extra operands without operators or functions");
 		}
 		return root;
 	}
@@ -141,10 +138,7 @@ public class ExpressionTreeGenerator {
 				// If no left parentheses are encountered, either the
 				// separator was misplaced or parentheses were mismatched.
 				if (operators.isEmpty() || !(operators.peek() instanceof LeftParenToken)) {
-					String message = "Parentheses were mismatched.";
-					ErrorHandling parseEx = new ErrorHandling(message);
-					parseEx.showError();
-					throw new ParseException(message);
+					throw new ParseException("Parentheses were mismatched.");
 				}
 
 			} else if (token instanceof LeftParenToken) {
@@ -160,10 +154,7 @@ public class ExpressionTreeGenerator {
 				// Pop the left parenthesis from the stack, but not onto the
 				// output queue.
 				if (operators.isEmpty()) {
-					String message = "Missing (";
-					ErrorHandling parseEx = new ErrorHandling(message);
-					parseEx.showError();
-					throw new ParseException(message);
+					throw new ParseException("Missing (");
 				}
 				operators.pop();
 
@@ -174,10 +165,7 @@ public class ExpressionTreeGenerator {
 				}
 
 			} else {
-				String message = "ERROR: No match: " + token;
-				ErrorHandling parseEx = new ErrorHandling(message);
-				parseEx.showError();
-				System.out.println(message);
+				System.out.println("ERROR: No match: " + token);
 			}
 			// System.out.println("Postfix: " + postfixResult);
 		}
@@ -190,10 +178,7 @@ public class ExpressionTreeGenerator {
 			Token top = operators.peek();
 
 			if (top.equals(CharTokenFactory.getToken('(')) || top.equals(CharTokenFactory.getToken(')'))) {
-				String message = "Mismatched Parentheses";
-				ErrorHandling parseEx = new ErrorHandling(message);
-				parseEx.showError();
-				throw new ParseException(message);
+				throw new ParseException("Mismatched Parentheses");
 			}
 			postfixResult.push(operators.pop());
 		}

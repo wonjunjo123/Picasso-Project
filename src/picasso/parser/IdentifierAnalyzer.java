@@ -52,10 +52,7 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 		}
 		//System.out.println("test");
 		if (mapped == null) {
-			String message = "Unrecognized Identifier Variable: " + id;
-			ErrorHandling parseEx = new ErrorHandling(message);
-			parseEx.showError();
-			throw new ParseException(message);
+			throw new ParseException("Unrecognized Identifier Variable: " + id);
 		}
 
 		// TODO : What should we do if we don't recognize the identifier?

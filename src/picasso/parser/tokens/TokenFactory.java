@@ -81,49 +81,31 @@ public class TokenFactory {
 	private static ColorToken parseColorToken(StreamTokenizer tokenizer) {
 		Token r = parse(tokenizer);
 		if (!(r instanceof NumberToken)) {
-			String message = "Error parsing color, expected number";
-			ErrorHandling parseEx = new ErrorHandling(message);
-			parseEx.showError();
-			throw new ParseException(message);
+			throw new ParseException("Error parsing color, expected number");
 		}
 
 		Token comma = parse(tokenizer);
 		if (!(comma instanceof CommaToken)) {
-			String message = "Error parsing color, expected ,";
-			ErrorHandling parseEx = new ErrorHandling(message);
-			parseEx.showError();
-			throw new ParseException(message);
+			throw new ParseException("Error parsing color, expected ,");
 		}
 
 		Token g = parse(tokenizer);
 		if (!(g instanceof NumberToken)) {
-			String message = "Error parsing color, expected number";
-			ErrorHandling parseEx = new ErrorHandling(message);
-			parseEx.showError();
-			throw new ParseException(message);
+			throw new ParseException("Error parsing color, expected number");
 		}
 		comma = parse(tokenizer);
 		if (!(comma instanceof CommaToken)) {
-			String message = "Error parsing color, expected ,";
-			ErrorHandling parseEx = new ErrorHandling(message);
-			parseEx.showError();
-			throw new ParseException(message);
+			throw new ParseException("Error parsing color, expected ,");
 		}
 
 		Token b = parse(tokenizer);
 		if (!(b instanceof NumberToken)) {
-			String message = "Error parsing color, expected number";
-			ErrorHandling parseEx = new ErrorHandling(message);
-			parseEx.showError();
-			throw new ParseException(message);
+			throw new ParseException("Error parsing color, expected number");
 		}
 
 		Token rightBracket = parse(tokenizer);
 		if (!(rightBracket instanceof RightBracketToken)) {
-			String message = "Error parsing color, expected ] got " + rightBracket;
-			ErrorHandling parseEx = new ErrorHandling(message);
-			parseEx.showError();
-			throw new ParseException(message);
+			throw new ParseException("Error parsing color, expected ] got " + rightBracket);
 		}
 
 		NumberToken red = (NumberToken) r;
@@ -146,8 +128,6 @@ public class TokenFactory {
 			errorMsg += "Blue must be within range [-1,1].";
 		}
 		if (error) {
-			ErrorHandling parseEx = new ErrorHandling(errorMsg);
-			parseEx.showError();
 			throw new ParseException(errorMsg);
 		}
 

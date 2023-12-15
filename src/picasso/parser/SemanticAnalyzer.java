@@ -163,10 +163,7 @@ public class SemanticAnalyzer implements SemanticAnalyzerInterface {
 
 		if (tokens.isEmpty()) {
 			// XXX: Is this the only reason that the token stack is empty?
-			String message = "Expected another argument.";
-			ErrorHandling parseEx = new ErrorHandling(message);
-			parseEx.showError();
-			throw new ParseException(message);
+			throw new ParseException("Expected another argument.");
 		}
 
 		// Find the appropriate semantic analyzer for the token.

@@ -34,10 +34,7 @@ public class ConstantAnalyzer implements SemanticAnalyzerInterface {
 
 		// Would violate the preconditions of the constant
 		if (value < -1 || value > 1) {
-			String message = "Constant is out of range  [-1, 1]";
-			ErrorHandling parseEx = new ErrorHandling(message);
-			parseEx.showError();
-			throw new ParseException(message);
+			throw new ParseException("Constant is out of range  [-1, 1]");
 		}
 
 		return new Constant(value);
