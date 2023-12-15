@@ -264,6 +264,13 @@ public class TokenizerTest {
 		assertEquals(new RightParenToken(), tokens.get(3));
 	}
 	
+	@Test 
+	public void testTokenizeNot() {
+		String expression = "!x";
+		tokens =tokenizer.parseTokens(expression);
+		assertEquals(new NotToken(), tokens.get(0));
+		assertEquals(new IdentifierToken("x"), tokens.get(1));
+	}
 	// TODO: Test arithmetic (rather than function-based) expressions ...
 
 }

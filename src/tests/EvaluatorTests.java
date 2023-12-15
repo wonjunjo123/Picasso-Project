@@ -452,6 +452,19 @@ public class EvaluatorTests {
 
 	}
   	
+  	@Test
+  	public void testNotEvaluation() {
+  		Not myTree = new Not(new X());
+  		
+  		double[] tests = { -1.7, -1, -.00001, -0.5, 0, .000001, 0.5, 1, 1.5 };
+		
+		for (double testVal : tests) {
+			double notOfTestVal1 = -testVal;
+			assertEquals(new RGBColor(notOfTestVal1, notOfTestVal1, notOfTestVal1),myTree.evaluate(testVal, 0));
+		}
+			
+  	}
+  	
 }
 		
 	
