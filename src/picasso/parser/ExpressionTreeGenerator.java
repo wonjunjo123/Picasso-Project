@@ -9,6 +9,7 @@ import picasso.parser.tokens.*;
 import picasso.parser.tokens.chars.*;
 import picasso.parser.tokens.functions.*;
 import picasso.parser.tokens.operations.*;
+import picasso.view.ErrorHandling;
 
 /**
  * Parses a string into an expression tree based on rules for arithmetic.
@@ -47,7 +48,10 @@ public class ExpressionTreeGenerator {
 		
 		// Is this the best place to put this check?
 		if (!postfix.isEmpty()) {
-			throw new ParseException("Extra operands without operators or functions");
+			String message = "Extra operands without operators or functions";
+			ErrorHandling parseEx = new ErrorHandling(message);
+			parseEx.showError();
+			throw new ParseException(message);
 		}
 		return root;
 	}
@@ -103,6 +107,8 @@ public class ExpressionTreeGenerator {
 				postfixResult.push(token);
 			} else if (token instanceof FunctionToken) {
 				operators.push(token);
+			} else if (token instanceof WordToken) {
+				operators.push(token);
 			} else if (token instanceof OperationInterface) {
 
 				/*
@@ -135,7 +141,10 @@ public class ExpressionTreeGenerator {
 				// If no left parentheses are encountered, either the
 				// separator was misplaced or parentheses were mismatched.
 				if (operators.isEmpty() || !(operators.peek() instanceof LeftParenToken)) {
-					throw new ParseException("Parentheses were mismatched.");
+					String message = "Parentheses were mismatched.";
+					ErrorHandling parseEx = new ErrorHandling(message);
+					parseEx.showError();
+					throw new ParseException(message);
 				}
 
 			} else if (token instanceof LeftParenToken) {
@@ -151,7 +160,10 @@ public class ExpressionTreeGenerator {
 				// Pop the left parenthesis from the stack, but not onto the
 				// output queue.
 				if (operators.isEmpty()) {
-					throw new ParseException("Missing (");
+					String message = "Missing (";
+					ErrorHandling parseEx = new ErrorHandling(message);
+					parseEx.showError();
+					throw new ParseException(message);
 				}
 				operators.pop();
 
@@ -162,7 +174,10 @@ public class ExpressionTreeGenerator {
 				}
 
 			} else {
-				System.out.println("ERROR: No match: " + token);
+				String message = "ERROR: No match: " + token;
+				ErrorHandling parseEx = new ErrorHandling(message);
+				parseEx.showError();
+				System.out.println(message);
 			}
 			// System.out.println("Postfix: " + postfixResult);
 		}
@@ -175,7 +190,10 @@ public class ExpressionTreeGenerator {
 			Token top = operators.peek();
 
 			if (top.equals(CharTokenFactory.getToken('(')) || top.equals(CharTokenFactory.getToken(')'))) {
-				throw new ParseException("Mismatched Parentheses");
+				String message = "Mismatched Parentheses";
+				ErrorHandling parseEx = new ErrorHandling(message);
+				parseEx.showError();
+				throw new ParseException(message);
 			}
 			postfixResult.push(operators.pop());
 		}
