@@ -11,9 +11,16 @@ import picasso.view.Frame;
  */
 @SuppressWarnings("serial")
 public class ParseException extends RuntimeException {
-
+	
+	private String message;
+	
 	public ParseException(String message) {
 		super("ParseException: " + message);
+		this.message = message;
+	}
+	
+	public String getMessage() {
+		return this.message;
 	}
 
 }

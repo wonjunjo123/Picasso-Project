@@ -15,6 +15,8 @@ import picasso.model.Pixmap;
 import picasso.util.ThreadedCommand;
 import picasso.view.commands.*;
 
+import picasso.parser.*;
+
 /**
  * Main container for the Picasso application
  *
@@ -51,8 +53,17 @@ public class Frame extends JFrame implements KeyListener {
 			public void actionPerformed(ActionEvent e) {
 
 				Evaluator evaluator = new Evaluator();
-				evaluator.execute(canvas.getPixmap());
-				canvas.refresh();
+				try {
+					evaluator.execute(canvas.getPixmap());
+					canvas.refresh();
+				}
+				catch (ParseException | IllegalArgumentException ex) {
+					ErrorHandling error = new ErrorHandling(ex.getMessage());
+					error.showError();
+					canvas.refresh();
+				}
+				
+				
 
 				String text = getExpressionText();
 
