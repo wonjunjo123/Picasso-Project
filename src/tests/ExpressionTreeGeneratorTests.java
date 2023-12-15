@@ -260,10 +260,5 @@ public class ExpressionTreeGeneratorTests {
 		assertEquals(new Exponentiation(new Exponentiation(new X(), new Y()), new RGBColor(-.51, 0, 1)), e);
 	}
 	
-	
-	
-	
-	
-	
 
 }

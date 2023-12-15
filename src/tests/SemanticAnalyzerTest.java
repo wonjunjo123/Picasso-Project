@@ -251,7 +251,5 @@ class SemanticAnalyzerTest {
 
 		assertEquals(new Exponentiation(new X(), new Y()), actual);
 	}
-	
-
 
 }

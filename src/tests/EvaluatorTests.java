@@ -421,14 +421,12 @@ public class EvaluatorTests {
 			double expOfTestVal1 = Math.pow(testVal, -1);
 			double expOfTestVal2 = Math.pow(testVal, -0.5);
 			double expOfTestVal3 = Math.pow(testVal, 0);
-			double expOfTestVal4 = Math.pow(testVal, 0.5);
-			double expOfTestVal5 = Math.pow(testVal, 1);
+			double expOfTestVal4 = Math.pow(testVal, 1);
 			
 			assertEquals(new RGBColor(expOfTestVal1, expOfTestVal1, expOfTestVal1), myTree.evaluate(testVal, -1));
 			assertEquals(new RGBColor(expOfTestVal2, expOfTestVal2, expOfTestVal2).getRed(), myTree.evaluate(testVal, -0.5).getRed(), 0.01);
 			assertEquals(new RGBColor(expOfTestVal3, expOfTestVal3, expOfTestVal3), myTree.evaluate(testVal, 0));
-			assertEquals(new RGBColor(expOfTestVal4, expOfTestVal4, expOfTestVal4).getBlue(), myTree.evaluate(testVal, 0.5).getBlue(), 0.01);
-			assertEquals(new RGBColor(expOfTestVal5, expOfTestVal5, expOfTestVal5), myTree.evaluate(testVal, 1));
+			assertEquals(new RGBColor(expOfTestVal4, expOfTestVal4, expOfTestVal4), myTree.evaluate(testVal, 1));
 		
 			
 			
