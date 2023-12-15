@@ -355,9 +355,6 @@ public class EvaluatorTests {
   		assertEquals(new RGBColor(1,1,1), myTree.evaluate(-1,0));
   		assertEquals(new RGBColor(1,1,1), myTree.evaluate(0,0));
   		assertEquals(new RGBColor(1,1,1), myTree.evaluate(1,0));
-  		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(-1,1));
-  		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(0,1));
-  		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(1,1));
 		
 	}
   

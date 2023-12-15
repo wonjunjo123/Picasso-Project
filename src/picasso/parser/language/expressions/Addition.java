@@ -11,6 +11,7 @@ import picasso.parser.language.ExpressionTreeNode;
  */
 public class Addition extends ExpressionTreeNode {
 	
+	
 	ExpressionTreeNode left;
 	ExpressionTreeNode right;
 
@@ -70,6 +71,12 @@ public class Addition extends ExpressionTreeNode {
 		
 		//return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "Addition [left=" + left + ", right=" + right + "]";
+	}
+
 	
 
 }
