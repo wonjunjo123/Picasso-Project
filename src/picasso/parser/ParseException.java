@@ -14,9 +14,6 @@ public class ParseException extends RuntimeException {
 
 	public ParseException(String message) {
 		super("ParseException: " + message);
-		//These should be in gui
-		ErrorHandling parseEx = new ErrorHandling(message);
-		parseEx.showError();
 	}
 
 }

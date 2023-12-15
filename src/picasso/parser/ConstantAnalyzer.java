@@ -6,6 +6,7 @@ import picasso.parser.language.ExpressionTreeNode;
 import picasso.parser.language.expressions.Constant;
 import picasso.parser.tokens.NumberToken;
 import picasso.parser.tokens.Token;
+import picasso.view.ErrorHandling;
 
 /**
  * Analyzer for a constant, must be between [-1, 1]
@@ -33,7 +34,10 @@ public class ConstantAnalyzer implements SemanticAnalyzerInterface {
 
 		// Would violate the preconditions of the constant
 		if (value < -1 || value > 1) {
-			throw new ParseException("Constant is out of range  [-1, 1]");
+			String message = "Constant is out of range  [-1, 1]";
+			ErrorHandling parseEx = new ErrorHandling(message);
+			parseEx.showError();
+			throw new ParseException(message);
 		}
 
 		return new Constant(value);

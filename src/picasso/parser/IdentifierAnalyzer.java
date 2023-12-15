@@ -9,6 +9,7 @@ import picasso.parser.language.expressions.X;
 import picasso.parser.language.expressions.Y;
 import picasso.parser.tokens.IdentifierToken;
 import picasso.parser.tokens.Token;
+import picasso.view.ErrorHandling;
 
 import javax.swing.*;
 
@@ -52,6 +53,8 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 		//System.out.println("test");
 		if (mapped == null) {
 			String message = "Unrecognized Identifier Variable: " + id;
+			ErrorHandling parseEx = new ErrorHandling(message);
+			parseEx.showError();
 			throw new ParseException(message);
 		}
 
