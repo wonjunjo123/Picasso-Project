@@ -9,6 +9,7 @@ import picasso.parser.tokens.*;
 import picasso.parser.tokens.chars.*;
 import picasso.parser.tokens.functions.*;
 import picasso.parser.tokens.operations.*;
+import picasso.view.ErrorHandling;
 
 /**
  * Parses a string into an expression tree based on rules for arithmetic.
@@ -102,6 +103,8 @@ public class ExpressionTreeGenerator {
 			} else if (token instanceof IdentifierToken) {
 				postfixResult.push(token);
 			} else if (token instanceof FunctionToken) {
+				operators.push(token);
+			} else if (token instanceof WordToken) {
 				operators.push(token);
 			} else if (token instanceof OperationInterface) {
 

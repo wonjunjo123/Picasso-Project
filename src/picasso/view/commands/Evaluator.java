@@ -26,7 +26,9 @@ public class Evaluator implements Command<Pixmap> {
 	 */
 	public void execute(Pixmap target) {
 		// create the expression to evaluate just once
-		ExpressionTreeNode expr = createExpression("floor(y)");
+		//execute(target, "");
+		String text= Frame.getExpressionText();
+		ExpressionTreeNode expr = createExpression(text);
 		// evaluate it for each pixel
 		if (expr != null) {
 			Dimension size = target.getSize();
@@ -40,17 +42,21 @@ public class Evaluator implements Command<Pixmap> {
 			}
 		}
 	}
-	public void execute(Pixmap target, String s) {
+	
+	public void execute(Pixmap target, String step) {
 		// create the expression to evaluate just once
-		ExpressionTreeNode expr = createExpression(s);
+		String text = Frame.getExpressionText() + step;
+		ExpressionTreeNode expr = createExpression(text);
 		// evaluate it for each pixel
-		Dimension size = target.getSize();
-		for (int imageY = 0; imageY < size.height; imageY++) {
-			double evalY = imageToDomainScale(imageY, size.height);
-			for (int imageX = 0; imageX < size.width; imageX++) {
-				double evalX = imageToDomainScale(imageX, size.width);
-				Color pixelColor = expr.evaluate(evalX, evalY).toJavaColor();
-				target.setColor(imageX, imageY, pixelColor);
+		if (expr != null) {
+			Dimension size = target.getSize();
+			for (int imageY = 0; imageY < size.height; imageY++) {
+				double evalY = imageToDomainScale(imageY, size.height);
+				for (int imageX = 0; imageX < size.width; imageX++) {
+					double evalX = imageToDomainScale(imageX, size.width);
+					Color pixelColor = expr.evaluate(evalX, evalY).toJavaColor();
+					target.setColor(imageX, imageY, pixelColor);
+				}
 			}
 		}
 	}
@@ -67,14 +73,14 @@ public class Evaluator implements Command<Pixmap> {
 	 * 
 	 * A place holder for a more interesting way to build the expression.
 	 */
-	private ExpressionTreeNode createExpression(String s) {
+	private ExpressionTreeNode createExpression(String text) {
 		// Note, when you're testing, you can use the ExpressionTreeGenerator to
 		// generate expression trees from strings, or you can create expression
 		// objects directly (as in the commented statement below).
 
-		String text= Frame.getExpressionText();
 		
-
+		
+		
 		ExpressionTreeGenerator expTreeGen = new ExpressionTreeGenerator();
 		
 		return expTreeGen.makeExpression(text);

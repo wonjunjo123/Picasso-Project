@@ -15,6 +15,8 @@ import picasso.model.Pixmap;
 import picasso.util.ThreadedCommand;
 import picasso.view.commands.*;
 
+import picasso.parser.*;
+
 /**
  * Main container for the Picasso application
  *
@@ -30,6 +32,7 @@ public class Frame extends JFrame implements KeyListener {
 	private static int index = 0;
 
 	private static JTextField expressionTextField;
+  private Evaluator evaluator = new Evaluator();
 
 	public Frame(Dimension size) {
 
@@ -49,11 +52,21 @@ public class Frame extends JFrame implements KeyListener {
 		expressionTextField = new JTextField(40);
 		expressionTextField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				Evaluator evaluator = new Evaluator();
-				evaluator.execute(canvas.getPixmap());
+        
+        Evaluator evaluator = new Evaluator();
+				try {
+					evaluator.execute(canvas.getPixmap());
+					canvas.refresh();
+				}
+				catch (ParseException | IllegalArgumentException ex) {
+					ErrorHandling error = new ErrorHandling(ex.getMessage());
+					error.showError();
+					canvas.refresh();
+				}
+        
+        evaluator.execute(canvas.getPixmap());
 				canvas.refresh();
-
+        
 				String text = getExpressionText();
 
 				if (expressions.size() == 0) {
@@ -101,6 +114,7 @@ public class Frame extends JFrame implements KeyListener {
 
 		commands.add("Open", new Reader());
 		commands.add("Evaluate", new ThreadedCommand<Pixmap>(canvas, new Evaluator()));
+		commands.add("Animate", new ThreadedCommand<Pixmap>(canvas, new Animator(new Evaluator())));
 		commands.add("Save", new Writer());
 		commands.add(expressionTextField);
 

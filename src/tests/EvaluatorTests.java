@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import picasso.parser.WordAnalyzer;
 import picasso.parser.language.ExpressionTreeNode;
 import picasso.parser.language.expressions.*;
 
@@ -263,7 +264,6 @@ public class EvaluatorTests {
 		RGBColor sinBlack = myTree.evaluate(-1.5574, -1.5574);
 		RGBColor sinGray = myTree.evaluate(0, 0);
 		RGBColor sinWhite = myTree.evaluate(1.5574, 1.5574);
-		System.out.println(Math.atan(1.5574));
 		
 		RGBColor[] sinCols = {sinBlack, sinGray, sinWhite};
 		
@@ -348,21 +348,43 @@ public class EvaluatorTests {
   	@Test
 	public void testImageWrapEvaluation() {
   		ImageWrap myTree = new ImageWrap(new Image("vortex.jpg"), new Addition(new X(), new X()), new Y());
-		
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(-1,-1));
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(0,-1));
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(1,-1));
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(-1,0));
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(0,0));
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(1,0));
-  		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(-1,1));
-  		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(0,1));
-  		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(1,1));
+  		Image testImage = new Image("vortex.jpg");
+  		
+  		RGBColor testColor = new RGBColor(testImage.getColor(0, 0)); 
+  		assertEquals(testColor, myTree.evaluate(-1,-1));
+  		
+  		testColor = new RGBColor(testImage.getColor(testImage.getSize().width/2, 0));
+  		assertEquals(testColor, myTree.evaluate(1,-1));
+  		
+  		testColor = new RGBColor(testImage.getColor(testImage.getSize().width/2, testImage.getSize().height-1));
+  		assertEquals(testColor, myTree.evaluate(-1,1));
+  		
+  		testColor = new RGBColor(testImage.getColor(testImage.getSize().width/2, testImage.getSize().height-1));
+  		assertEquals(testColor, myTree.evaluate(1,1));
 		
 	}
   	
   	@Test
-	public void testMinusEvaluation() {
+	public void testImageClipEvaluation() {
+  		ImageClip myTree = new ImageClip(new Image("vortex.jpg"), new Addition(new X(), new X()), new Y());
+  		Image testImage = new Image("vortex.jpg");
+  		
+		RGBColor testColor = new RGBColor(testImage.getColor(0, 0)); 
+  		assertEquals(testColor, myTree.evaluate(-1,-1));
+  		
+  		testColor = new RGBColor(testImage.getColor(testImage.getSize().width-1, 0));
+  		assertEquals(testColor, myTree.evaluate(1,-1));
+  		
+  		testColor = new RGBColor(testImage.getColor(0, testImage.getSize().height-1));
+  		assertEquals(testColor, myTree.evaluate(-1,1));
+  		
+  		testColor = new RGBColor(testImage.getColor(testImage.getSize().width-1, testImage.getSize().height-1));
+  		assertEquals(testColor, myTree.evaluate(1,1));
+		
+	}
+  
+  @Test
+  public void testMinusEvaluation() {
 		Subtraction myTree = new Subtraction(new X(), new Y());
 
 		// some straightforward tests
@@ -439,6 +461,19 @@ public class EvaluatorTests {
   	
 
 	}
+  	
+  	@Test
+  	public void testNotEvaluation() {
+  		Not myTree = new Not(new X());
+  		
+  		double[] tests = { -1.7, -1, -.00001, -0.5, 0, .000001, 0.5, 1, 1.5 };
+		
+		for (double testVal : tests) {
+			double notOfTestVal1 = -testVal;
+			assertEquals(new RGBColor(notOfTestVal1, notOfTestVal1, notOfTestVal1),myTree.evaluate(testVal, 0));
+		}
+			
+  	}
   	
 }
 		

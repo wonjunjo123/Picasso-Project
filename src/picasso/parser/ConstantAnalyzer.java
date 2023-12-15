@@ -6,6 +6,7 @@ import picasso.parser.language.ExpressionTreeNode;
 import picasso.parser.language.expressions.Constant;
 import picasso.parser.tokens.NumberToken;
 import picasso.parser.tokens.Token;
+import picasso.view.ErrorHandling;
 
 /**
  * Analyzer for a constant, must be between [-1, 1]

@@ -41,16 +41,18 @@ public class IdentifierAnalyzer implements SemanticAnalyzerInterface {
 	 */
 	@Override
 	public ExpressionTreeNode generateExpressionTree(Stack<Token> tokens) {
-		IdentifierToken t = (IdentifierToken) tokens.pop();
+		Token token = tokens.pop();
+		IdentifierToken t = (IdentifierToken) token;
 		String id = t.getName();
+		//System.out.println(id);
 		ExpressionTreeNode mapped = idToExpression.get(id);
 		
 		if (mapped != null) {
 			return mapped;
 		}
+		//System.out.println("test");
 		if (mapped == null) {
-			String message = "Unrecognized Identifier Variable: " + id;
-			throw new ParseException(message);
+			throw new ParseException("Unrecognized Identifier Variable: " + id);
 		}
 
 		// TODO : What should we do if we don't recognize the identifier?
