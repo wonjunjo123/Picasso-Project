@@ -26,6 +26,7 @@ public class Evaluator implements Command<Pixmap> {
 	 */
 	public void execute(Pixmap target) {
 		// create the expression to evaluate just once
+		//execute(target, "");
 		String text= Frame.getExpressionText();
 		ExpressionTreeNode expr = createExpression(text);
 		// evaluate it for each pixel
@@ -79,7 +80,7 @@ public class Evaluator implements Command<Pixmap> {
 
 		
 		
-
+		
 		ExpressionTreeGenerator expTreeGen = new ExpressionTreeGenerator();
 		
 		return expTreeGen.makeExpression(text);
