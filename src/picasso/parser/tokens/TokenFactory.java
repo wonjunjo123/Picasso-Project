@@ -13,6 +13,7 @@ import picasso.parser.tokens.chars.*;
 //import picasso.parser.tokens.chars.LeftBracketToken;
 //import picasso.parser.tokens.chars.RightBracketToken;
 //import picasso.parser.tokens.chars.QuoteToken;
+import picasso.view.ErrorHandling;
 
 /**
  * Looks at a generic token and creates the appropriate token type
@@ -80,31 +81,49 @@ public class TokenFactory {
 	private static ColorToken parseColorToken(StreamTokenizer tokenizer) {
 		Token r = parse(tokenizer);
 		if (!(r instanceof NumberToken)) {
-			throw new ParseException("Error parsing color, expected number");
+			String message = "Error parsing color, expected number";
+			ErrorHandling parseEx = new ErrorHandling(message);
+			parseEx.showError();
+			throw new ParseException(message);
 		}
 
 		Token comma = parse(tokenizer);
 		if (!(comma instanceof CommaToken)) {
-			throw new ParseException("Error parsing color, expected ,");
+			String message = "Error parsing color, expected ,";
+			ErrorHandling parseEx = new ErrorHandling(message);
+			parseEx.showError();
+			throw new ParseException(message);
 		}
 
 		Token g = parse(tokenizer);
 		if (!(g instanceof NumberToken)) {
-			throw new ParseException("Error parsing color, expected number");
+			String message = "Error parsing color, expected number";
+			ErrorHandling parseEx = new ErrorHandling(message);
+			parseEx.showError();
+			throw new ParseException(message);
 		}
 		comma = parse(tokenizer);
 		if (!(comma instanceof CommaToken)) {
-			throw new ParseException("Error parsing color, expected ,");
+			String message = "Error parsing color, expected ,";
+			ErrorHandling parseEx = new ErrorHandling(message);
+			parseEx.showError();
+			throw new ParseException(message);
 		}
 
 		Token b = parse(tokenizer);
 		if (!(b instanceof NumberToken)) {
-			throw new ParseException("Error parsing color, expected number");
+			String message = "Error parsing color, expected number";
+			ErrorHandling parseEx = new ErrorHandling(message);
+			parseEx.showError();
+			throw new ParseException(message);
 		}
 
 		Token rightBracket = parse(tokenizer);
 		if (!(rightBracket instanceof RightBracketToken)) {
-			throw new ParseException("Error parsing color, expected ] got " + rightBracket);
+			String message = "Error parsing color, expected ] got " + rightBracket;
+			ErrorHandling parseEx = new ErrorHandling(message);
+			parseEx.showError();
+			throw new ParseException(message);
 		}
 
 		NumberToken red = (NumberToken) r;
@@ -127,6 +146,8 @@ public class TokenFactory {
 			errorMsg += "Blue must be within range [-1,1].";
 		}
 		if (error) {
+			ErrorHandling parseEx = new ErrorHandling(errorMsg);
+			parseEx.showError();
 			throw new ParseException(errorMsg);
 		}
 
