@@ -31,6 +31,11 @@ The coordinates and colors will be given in range [-1,1].
 
 <img width="797" alt="Screenshot 2023-12-14 at 6 59 09 PM" src="https://github.com/WLU-CSCI209-F23/picasso-invincibles/assets/136394451/845a3285-c2d7-4348-86f5-1beeeb4f0613">
 
+### Navigate expression history
+This extension allows the user to navigate the history of evaluated expressions in a Picasso session. By pressing the UP arrow key, the user navigates back in time, and the expression entry field will be repopulated with the previous error-free expression different than the one most recently evluated. The DOWN arrow key can be used to navigate toward the present to see the more recently evaluated expressions. 
+
+This feature ensures that no expression with input errors will be retained in history and that equivalent expressions will not be remembered in history if evaluated adjacently. 
+
 
 ## Code Base History
 
