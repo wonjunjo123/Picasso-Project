@@ -348,13 +348,38 @@ public class EvaluatorTests {
   	@Test
 	public void testImageWrapEvaluation() {
   		ImageWrap myTree = new ImageWrap(new Image("vortex.jpg"), new Addition(new X(), new X()), new Y());
+  		Image testImage = new Image("vortex.jpg");
+  		
+  		RGBColor testColor = new RGBColor(testImage.getColor(0, 0)); 
+  		assertEquals(testColor, myTree.evaluate(-1,-1));
+  		
+  		testColor = new RGBColor(testImage.getColor(testImage.getSize().width/2, 0));
+  		assertEquals(testColor, myTree.evaluate(1,-1));
+  		
+  		testColor = new RGBColor(testImage.getColor(testImage.getSize().width/2, testImage.getSize().height-1));
+  		assertEquals(testColor, myTree.evaluate(-1,1));
+  		
+  		testColor = new RGBColor(testImage.getColor(testImage.getSize().width/2, testImage.getSize().height-1));
+  		assertEquals(testColor, myTree.evaluate(1,1));
 		
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(-1,-1));
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(0,-1));
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(1,-1));
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(-1,0));
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(0,0));
-  		assertEquals(new RGBColor(1,1,1), myTree.evaluate(1,0));
+	}
+  	
+  	@Test
+	public void testImageClipEvaluation() {
+  		ImageClip myTree = new ImageClip(new Image("vortex.jpg"), new Addition(new X(), new X()), new Y());
+  		Image testImage = new Image("vortex.jpg");
+  		
+		RGBColor testColor = new RGBColor(testImage.getColor(0, 0)); 
+  		assertEquals(testColor, myTree.evaluate(-1,-1));
+  		
+  		testColor = new RGBColor(testImage.getColor(testImage.getSize().width-1, 0));
+  		assertEquals(testColor, myTree.evaluate(1,-1));
+  		
+  		testColor = new RGBColor(testImage.getColor(0, testImage.getSize().height-1));
+  		assertEquals(testColor, myTree.evaluate(-1,1));
+  		
+  		testColor = new RGBColor(testImage.getColor(testImage.getSize().width-1, testImage.getSize().height-1));
+  		assertEquals(testColor, myTree.evaluate(1,1));
 		
 	}
   
