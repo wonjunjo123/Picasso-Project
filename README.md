@@ -36,6 +36,8 @@ This extension allows the user to navigate the history of evaluated expressions 
 
 This feature ensures that no expression with input errors will be retained in history and that equivalent expressions will not be remembered in history if evaluated adjacently. 
 
+### Expression Generation Based on a String
+This extension allows the user to input any word into the text field and it will generate an image based on that word. The word must be at least 3 characters long, as variables are 2 or less characters. The word will randomly generate an image and color for the image. The functions implemented are randomly generated, and the number of functions used is based on the word's length. For example, if the text field input is "abcd" (the quotations are not part of the input), then the image will be generated from 4 randomized functions. Words can be assigned to variables, as well.
 
 ## Code Base History
 
