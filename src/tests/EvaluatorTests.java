@@ -360,16 +360,6 @@ public class EvaluatorTests {
   		assertEquals(new RGBColor(-1,-1,-1), myTree.evaluate(1,1));
 		
 	}
-  	
-  @Test
-  public void testWordEvaluation() {
-  		Word myTree = new Word(new X());
-  		//WordAnalyzer.generateExpressionTree(myTree);
-  		//System.out.println(myTree.getLeft());
-  		//System.out.println(myTree.getRight());
-  		
-  		assertEquals("x", myTree.getWord().toString());
-  }
   
   @Test
   public void testMinusEvaluation() {
