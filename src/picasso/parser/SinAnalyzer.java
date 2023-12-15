@@ -19,7 +19,6 @@ public class SinAnalyzer extends UnaryFunctionAnalyzer {
 		// the parameter is the next token(s) on the stack.
 		// But, it needs to be processed
 		ExpressionTreeNode paramETN = SemanticAnalyzer.getInstance().generateExpressionTree(tokens);
-		
 		return new Sine(paramETN);
 		
 			

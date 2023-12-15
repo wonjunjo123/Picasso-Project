@@ -32,6 +32,7 @@ public class Frame extends JFrame implements KeyListener {
 	private static int index = 0;
 
 	private static JTextField expressionTextField;
+  private Evaluator evaluator = new Evaluator();
 
 	public Frame(Dimension size) {
 
@@ -51,8 +52,8 @@ public class Frame extends JFrame implements KeyListener {
 		expressionTextField = new JTextField(40);
 		expressionTextField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				Evaluator evaluator = new Evaluator();
+        
+        Evaluator evaluator = new Evaluator();
 				try {
 					evaluator.execute(canvas.getPixmap());
 					canvas.refresh();
@@ -62,15 +63,18 @@ public class Frame extends JFrame implements KeyListener {
 					error.showError();
 					canvas.refresh();
 				}
-				
-				
-
+        
+        evaluator.execute(canvas.getPixmap());
+				canvas.refresh();
+        
 				String text = getExpressionText();
 
 				if (expressions.size() == 0) {
 					expressions.add(text);
-					index++;
-				} else if (!(expressions.get(expressions.size() - 1).equals(text))) { // Does not add to history if previous entry
+					index = 0;	
+				}
+				
+				else if (!(expressions.get(expressions.size() - 1).equals(text))) { // Does not add to history if previous entry
 					expressions.add(text);
 					index++;
 				}
@@ -82,8 +86,12 @@ public class Frame extends JFrame implements KeyListener {
 
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
-
-					if (expressions.size() != 0 && index > 0) {
+					
+					if (!(getExpressionText().equals(expressions.get(index)))) {
+						setExpressionText(expressions.get(index));
+					}
+					
+					else if (expressions.size() != 0 && index > 0) {
 						index--;
 						setExpressionText(expressions.get(index)); // Update text bar with expression from history
 					}
@@ -106,6 +114,7 @@ public class Frame extends JFrame implements KeyListener {
 
 		commands.add("Open", new Reader());
 		commands.add("Evaluate", new ThreadedCommand<Pixmap>(canvas, new Evaluator()));
+		commands.add("Animate", new ThreadedCommand<Pixmap>(canvas, new Animator(new Evaluator())));
 		commands.add("Save", new Writer());
 		commands.add(expressionTextField);
 
@@ -113,7 +122,6 @@ public class Frame extends JFrame implements KeyListener {
 		getContentPane().add(canvas, BorderLayout.CENTER);
 		getContentPane().add(commands, BorderLayout.NORTH);
 		pack();
-
 	}
 
 	public static String getExpressionText() {
@@ -122,16 +130,6 @@ public class Frame extends JFrame implements KeyListener {
 
 	public static void setExpressionText(String s) {
 		expressionTextField.setText(s);
-	}
-
-	/**
-	 * Removes the last entry into expression history
-	 */
-	public static void removeLastExpression() {
-		if (expressions.size() != 0) {
-			expressions.remove(expressions.size());
-			index--;
-		}
 	}
 
 	/**

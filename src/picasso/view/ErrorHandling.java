@@ -44,8 +44,6 @@ public class ErrorHandling {
         errorFrame.setSize(500, 150);  
         errorFrame.setLayout(null);  
         errorFrame.setVisible(true);
-        
-        Frame.removeLastExpression(); // Removes incorrect expression with errors from history 
 	}
 
 }
