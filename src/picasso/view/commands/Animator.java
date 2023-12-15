@@ -17,17 +17,15 @@ public class Animator implements Command<Pixmap> {
 
 	private boolean isDone;
 	private Evaluator evaluator;
-	private String add = "+[0.1,0,-0.1]";
-	private final String step = "+[0.1,0,-0.1]";
+	private String add;
+	private final String step = "+[-0.05,0.05,0.025]";
 	
 	/**
 	 * Create a command that runs the given command and updates the given view
 	 * over time.
 	 */
 	public Animator(Evaluator evaluator) {
-		//myCommand = command;
-		//myView = view;
-		isDone = true;
+		this.isDone = true;
 		this.evaluator = evaluator;
 	}
 
@@ -35,14 +33,16 @@ public class Animator implements Command<Pixmap> {
 	 * Run the command on the target or cancel it if is already running.
 	 */
 	public void execute(Pixmap target) {
-		for (int i = 0; i < 100; i++) {
+		add = "+[-0.05,0.05,0.025]";
+		for (int i = 0; i < 50; i++) {
 			evaluator.execute(target, add);
 			add = add + step;
-			try {
-				Thread.sleep(100);
+			/*try {
+				Thread.sleep(50);
 			} catch (InterruptedException E) {
 				E.printStackTrace();
-			} 
+			} */
 		}
+		System.out.println("Done animating");
 	}
 }
