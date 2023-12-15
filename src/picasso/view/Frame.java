@@ -58,8 +58,10 @@ public class Frame extends JFrame implements KeyListener {
 
 				if (expressions.size() == 0) {
 					expressions.add(text);
-					index++;
-				} else if (!(expressions.get(expressions.size() - 1).equals(text))) { // Does not add to history if previous entry
+					index = 0;	
+				}
+				
+				else if (!(expressions.get(expressions.size() - 1).equals(text))) { // Does not add to history if previous entry
 					expressions.add(text);
 					index++;
 				}
@@ -71,8 +73,12 @@ public class Frame extends JFrame implements KeyListener {
 
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
-
-					if (expressions.size() != 0 && index > 0) {
+					
+					if (!(getExpressionText().equals(expressions.get(index)))) {
+						setExpressionText(expressions.get(index));
+					}
+					
+					else if (expressions.size() != 0 && index > 0) {
 						index--;
 						setExpressionText(expressions.get(index)); // Update text bar with expression from history
 					}
@@ -102,7 +108,6 @@ public class Frame extends JFrame implements KeyListener {
 		getContentPane().add(canvas, BorderLayout.CENTER);
 		getContentPane().add(commands, BorderLayout.NORTH);
 		pack();
-
 	}
 
 	public static String getExpressionText() {
@@ -111,16 +116,6 @@ public class Frame extends JFrame implements KeyListener {
 
 	public static void setExpressionText(String s) {
 		expressionTextField.setText(s);
-	}
-
-	/**
-	 * Removes the last entry into expression history
-	 */
-	public static void removeLastExpression() {
-		if (expressions.size() != 0) {
-			expressions.remove(expressions.size());
-			index--;
-		}
 	}
 
 	/**
