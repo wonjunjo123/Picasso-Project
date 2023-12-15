@@ -50,7 +50,6 @@ public class Animator implements Command<Pixmap> {
 				// halfway through the animation, change the gradient
 				step = randColorString(increment);
 			}
-			System.out.println(step);
 			evaluator.execute(target, add);
 			add = add + step;
 			try {
